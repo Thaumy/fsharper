@@ -1,6 +1,8 @@
 ﻿[<AutoOpen>]
 module fsharper.fn.List
 
+open fsharper.ethType
+
 let rec last list =
     match list with
     | [] -> None
