@@ -18,6 +18,8 @@
         <Compile Include="src\ethType\Result.fs" />
         <Compile Include="src\ethType\List.fs" />
         <Compile Include="src\moreType\Ord.fs" />
+        <Compile Include="src\moreType\GenericPipable.fs" />
+        <Compile Include="src\moreType\Pipable.fs" />
         <Compile Include="src\fn\List.fs" />
         <Compile Include="src\fn\Tuple.fs" />
         <Compile Include="src\fn\Function.fs" />
