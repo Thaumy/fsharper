@@ -12,7 +12,7 @@ type Pipe<'T> internal (beforeInvoked: 'T -> 'T) =
 
     new() = Pipe(id)
 
-    member self.build() = self :> GenericPipable<'T, 'T>
+    member self.build() = self :> Pipable<'T>
 
     member self.import(pipable: Pipable<'T>) =
         Pipe<'T>(pipable.invoke, func = self.func)
@@ -35,7 +35,7 @@ type StatePipe<'T> private (beforeInvoked: 'T -> 'T) as self =
 
     new() = StatePipe(id)
 
-    member self.build() = self :> GenericPipable<'T, 'T>
+    member self.build() = self :> Pipable<'T>
 
     member self.import(pipable: Pipable<'T>) =
         StatePipe<'T>(pipable.invoke, activate = self.activate, activated = self.activated)
