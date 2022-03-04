@@ -1,10 +1,10 @@
 ﻿[<AutoOpen>]
-module fsharper.ethType.ethResult
+module fsharper.enhType.enhResult
 
 open System
 open fsharper.typeExt
 
-type Result<'a, 'e> =
+type Result'<'a, 'e> =
     | Ok of 'a
     | Err of 'e
 
@@ -13,7 +13,7 @@ type Result<'a, 'e> =
         | Ok x -> f x |> Ok
         | Err e -> Err e
 
-    static member inline ap(ma: Result<'a -> 'b, 'e>, mb: Result<'a, 'e>) =
+    static member inline ap(ma: Result'<'a -> 'b, 'e>, mb: Result'<'a, 'e>) =
         match ma, mb with
         | Err e, _ -> Err e
         | Ok f, _ -> mb.fmap f

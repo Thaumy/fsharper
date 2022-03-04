@@ -2,7 +2,7 @@
 module fsharper.fn.List
 
 open fsharper.op
-open fsharper.ethType
+open fsharper.enhType
 
 let rec last list =
     match list with
@@ -53,7 +53,36 @@ let rec foldr f acc list =
     | x :: xs -> f x (foldr f acc xs)
     | [] -> acc
 
-let inline elem e list =
-    foldl (fun acc y -> y = e || acc) false list
+let inline any p list =
+    foldl (fun acc it -> p it || acc) false list
+
+let inline elem x list = any ((=) x) list
 
 let inline concat list = foldr (@) [] list
+
+let inline leftJoinNoInnerWhen p ls rs =
+    filter (fun l -> not <| any (p l) rs) ls
+
+let inline rightJoinNoInnerWhen p = leftJoinNoInnerWhen p |> flip
+
+let inline leftJoinNoInner ls rs = leftJoinNoInnerWhen (=) ls rs
+
+let inline rightJoinNoInner ls rs = leftJoinNoInner rs ls
+
+let inline innerJoinWhen p ls rs = filter (fun l -> any (p l) rs) ls
+
+let inline innerJoin ls rs = innerJoinWhen (=) ls rs
+
+let inline fullJoin ls rs = ls @ rs
+
+let rec duplicateWhen p list =
+    match list with
+    | x :: xs ->
+        match x :: filter (p x) xs with
+        | [ _ ] -> duplicateWhen p xs
+        | ds ->
+            ds
+            @ duplicateWhen p (rightJoinNoInnerWhen p ds xs)
+    | [] -> []
+
+let duplicate list = duplicateWhen (=) list
