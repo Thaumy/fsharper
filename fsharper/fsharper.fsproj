@@ -14,7 +14,6 @@
         <Compile Include="src\op\Applicative.fs" />
         <Compile Include="src\op\Monad.fs" />
         <Compile Include="src\typeExt\Object.fs" />
-        <Compile Include="src\typeExt\List.fs" />
         <Compile Include="src\ethType\Option.fs" />
         <Compile Include="src\ethType\Result.fs" />
         <Compile Include="src\ethType\List.fs" />

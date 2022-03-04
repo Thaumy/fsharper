@@ -1,6 +1,7 @@
 ﻿[<AutoOpen>]
 module fsharper.fn.List
 
+open fsharper.op
 open fsharper.ethType
 
 let rec last list =
@@ -14,13 +15,16 @@ let rec map f list =
     | x :: xs -> (f x) :: map f xs
     | [] -> []
 
+let rec mapOn<'a, 't> (f: 't -> 'a) (list: 'a list) =
+    match list with
+    | x :: xs when is<'t> x -> (cast x |> f) :: mapOn<'a, 't> f xs
+    | x :: xs -> x :: mapOn<'a, 't> f xs
+    | [] -> []
+
 let rec filter p list =
     match list with
-    | x :: xs ->
-        if p x then
-            x :: filter p xs
-        else
-            filter p xs
+    | x :: xs when p x -> x :: filter p xs
+    | _ :: xs -> filter p xs
     | [] -> []
 
 let inline head list =
