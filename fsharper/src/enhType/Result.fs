@@ -23,6 +23,8 @@ type Result'<'a, 'e> =
         | Err e -> Err e
         | Ok x -> f x
 
+    static member inline warp x = Ok x
+
     member inline self.unwarp() =
         match self with
         | Ok x -> x

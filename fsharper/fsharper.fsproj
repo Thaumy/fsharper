@@ -17,6 +17,7 @@
         <Compile Include="src\enhType\Option.fs" />
         <Compile Include="src\enhType\Result.fs" />
         <Compile Include="src\enhType\List.fs" />
+        <Compile Include="src\moreType\Cons.fs" />
         <Compile Include="src\moreType\Ord.fs" />
         <Compile Include="src\moreType\GenericPipable.fs" />
         <Compile Include="src\moreType\Pipable.fs" />

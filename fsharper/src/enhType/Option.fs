@@ -25,6 +25,8 @@ type Option'<'a> =
         | None -> None
         | Some x -> f x
 
+    static member inline warp x = Some x
+
     member inline self.unwarp() =
         match self with
         | Some x -> x

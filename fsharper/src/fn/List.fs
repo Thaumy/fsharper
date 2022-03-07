@@ -4,6 +4,16 @@ module fsharper.fn.List
 open fsharper.op
 open fsharper.enhType
 
+let inline head list =
+    match list with
+    | x :: _ -> Some x
+    | _ -> None
+
+let inline tail list =
+    match list with
+    | _ :: xs -> Some xs
+    | _ -> None
+
 let rec last list =
     match list with
     | [] -> None
@@ -26,16 +36,6 @@ let rec filter p list =
     | x :: xs when p x -> x :: filter p xs
     | _ :: xs -> filter p xs
     | [] -> []
-
-let inline head list =
-    match list with
-    | x :: _ -> Some x
-    | _ -> None
-
-let inline tail list =
-    match list with
-    | _ :: xs -> Some xs
-    | _ -> None
 
 let rec take n list =
     match list with
