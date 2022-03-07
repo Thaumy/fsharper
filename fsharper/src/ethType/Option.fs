@@ -1,12 +1,12 @@
 ﻿[<AutoOpen>]
-module fsharper.enhType.enhOption
+module fsharper.ethType.ethOption
 
 open fsharper.typeExt
 
 /// 尝试拆箱None错误
 exception TryToUnwarpNone
 
-type Option'<'a> =
+type Option<'a> =
     | Some of 'a
     | None
 
@@ -15,7 +15,7 @@ type Option'<'a> =
         | Some a -> f a |> Some
         | None -> None
 
-    static member inline ap(ma: Option'<'a -> 'b>, mb: Option'<'a>) =
+    static member inline ap(ma: Option<'a -> 'b>, mb: Option<'a>) =
         match ma, mb with
         | None, _ -> None
         | Some f, _ -> mb.fmap f
@@ -24,8 +24,6 @@ type Option'<'a> =
         match self with
         | None -> None
         | Some x -> f x
-
-    static member inline warp x = Some x
 
     member inline self.unwarp() =
         match self with

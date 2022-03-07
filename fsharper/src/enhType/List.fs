@@ -8,11 +8,17 @@ let rec private map f list =
     | x :: xs -> (f x) :: map f xs
     | [] -> []
 
-let rec foldr f acc list =
+let rec foldl f acc list =
+    match list with
+    | x :: xs -> foldl f (f acc x) xs
+    | [] -> acc
+
+let rec private foldr f acc list =
     match list with
     | x :: xs -> f x (foldr f acc xs)
     | [] -> acc
 
+let inline private concat list = foldr (@) [] list
 
 type List'<'a>(init: 'a list) =
     new() = List' []
@@ -33,29 +39,24 @@ type List'<'a>(init: 'a list) =
     member self.bind(f: 'a -> 'b List') : 'b List' =
         let f' x = (f x).list
 
-        let rec foldr f acc list =
-            match list with
-            | x :: xs -> f x (foldr f acc xs)
-            | [] -> acc
-
-        let inline concat list = foldr (@) [] list
-
         map f' self.list |> concat |> List'
+
+    static member inline warp x = List' [ x ]
 
     member self.unwarp() = self.list
 
     member self.debug() =
-        "["
-        + (foldr
-            (fun x acc ->
-                //下一级调试信息
-                let msg: string =
-                    try
-                        x.tryInvoke "debug"
-                    with
-                    | _ -> x.ToString()
+        let f acc x =
+            //下一级调试信息
+            let msg =
+                try
+                    x.tryInvoke "debug"
+                with
+                | _ -> x.ToString()
 
-                $"; {msg}{acc}")
-            " ]"
-            self.list)
-            .Remove(0, 1) //去除首部分号
+            $"{acc}; {msg}"
+
+        let result = foldl f "" self.list
+
+        //去除首部分号
+        $"[{result.Remove(0, 1)} ]"
