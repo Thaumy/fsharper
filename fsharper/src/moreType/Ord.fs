@@ -16,4 +16,12 @@ let cmp a b =
     else if a = b then EQ
     else LT
 
-let inline eq a b = a = b
+let inline eq a b = (=) a b
+
+let inline lt a b = (<) a b
+
+let inline gt a b = (>) a b
+
+let inline le a b = (<=) a b
+
+let inline ge a b = (>=) a b

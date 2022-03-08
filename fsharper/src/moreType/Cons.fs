@@ -1,6 +1,7 @@
 [<AutoOpen>]
 module fsharper.moreType.Cons
 
+open System
 open fsharper.typeExt.Object
 
 exception TryToUnwarpNil
@@ -17,8 +18,13 @@ let rec append ca cb =
 
 let rec foldl f acc cons =
     match cons with
-    | Nil -> acc
     | Cons (x, xs) -> foldl f (f acc x) xs
+    | Nil -> acc
+
+let rec foldr f acc cons =
+    match cons with
+    | Cons (x, xs) -> f x (foldr f acc xs)
+    | Nil -> acc
 
 let inline concat cons = foldl append Nil cons
 
@@ -55,9 +61,19 @@ type Cons<'t> with
                 with
                 | _ -> x.ToString()
 
-            $"{acc}, {msg}"
+            $"{acc} {msg}"
 
         let result = foldl f "" self
 
-        //去除首部分号
-        $"({result.Remove(0, 1)} )"
+        //去除首部空格
+        $"({result.Remove(0, 1)})"
+
+    static member list<'t>([<ParamArray>] arr: 't array) =
+        let max = arr.Length - 1
+
+        let rec withCount count =
+            match count with
+            | i when i = max -> Nil
+            | i -> Cons(arr.[i], withCount (count + 1))
+
+        withCount 0
