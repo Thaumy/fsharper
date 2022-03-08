@@ -13,11 +13,15 @@
         <Compile Include="src\op\Functor.fs" />
         <Compile Include="src\op\Applicative.fs" />
         <Compile Include="src\op\Monad.fs" />
+        <Compile Include="src\op\Monoid.fs" />
+        <Compile Include="src\op\Foldable.fs" />
         <Compile Include="src\typeExt\Object.fs" />
         <Compile Include="src\enhType\Option.fs" />
         <Compile Include="src\enhType\Result.fs" />
         <Compile Include="src\enhType\List.fs" />
         <Compile Include="src\moreType\Cons.fs" />
+        <Compile Include="src\moreType\Dual.fs" />
+        <Compile Include="src\moreType\Endo.fs" />
         <Compile Include="src\moreType\Ord.fs" />
         <Compile Include="src\moreType\GenericPipable.fs" />
         <Compile Include="src\moreType\Pipable.fs" />

@@ -1,9 +1,10 @@
 ﻿[<AutoOpen>]
 module fsharper.op.Monad
 
-/// flatMap
+/// bind
 let inline (>>=) m f =
     (^ma: (member bind : (^v -> ^mb) -> ^mb) m, f)
 
-/// flatMap但不返回值
+/// bind but no return
 let inline (>>=|) m f = m >>= f |> ignore
+

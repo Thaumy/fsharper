@@ -44,14 +44,14 @@ let rec take n list =
     | [] -> []
     | x :: xs -> x :: take (n - 1) xs
 
-let rec foldl f acc list =
-    match list with
-    | x :: xs -> foldl f (f acc x) xs
-    | [] -> acc
-
 let rec foldr f acc list =
     match list with
     | x :: xs -> f x (foldr f acc xs)
+    | [] -> acc
+
+let rec foldl f acc list =
+    match list with
+    | x :: xs -> foldl f (f acc x) xs
     | [] -> acc
 
 let inline any p list =
