@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module fsharper.enhType.enhResult
+module fsharper.types.Result'
 
 open System
 open fsharper.typeExt
@@ -21,13 +21,18 @@ type Result'<'a, 'e> =
         | Err e, _ -> Err e
         | Ok f, _ -> mb.fmap f
 
+    static member inline ``pure`` x = Ok x
+
     //Monad
     member self.bind f =
         match self with
         | Err e -> Err e
         | Ok x -> f x
 
-    static member inline warp x = Ok x
+    static member inline unit x = Result'<_, _>.``pure`` x
+
+    //Boxing
+    static member inline warp x = Result'<_, _>.``pure`` x
 
     member inline self.unwarp() =
         match self with
@@ -80,4 +85,4 @@ type Result'<'a, 'e> =
                 " ]"
                 self.list)
                 .Remove(0, 1)
-        *)
+*)

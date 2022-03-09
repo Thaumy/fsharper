@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module fsharper.enhType.enhOption
+module fsharper.types.Option'
 
 open fsharper.typeExt
 
@@ -23,13 +23,18 @@ type Option'<'a> =
         | None, _ -> None
         | Some f, _ -> mb.fmap f
 
+    static member inline ``pure`` x = Some x
+
     //Monad
     member inline self.bind f =
         match self with
         | None -> None
         | Some x -> f x
 
-    static member inline warp x = Some x
+    static member inline unit x = Option'<_>.``pure`` x
+
+    //Boxing
+    static member inline warp x = Option'<_>.``pure`` x
 
     member inline self.unwarp() =
         match self with

@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module fsharper.moreType.Ord
+module fsharper.types.Ord
 
 
 type Ordering =
@@ -20,7 +20,6 @@ let inline gt a b = (>) a b
 let inline le a b = (<=) a b
 
 let inline ge a b = (>=) a b
-
 
 let cmp a b =
     match a, b with

@@ -1,6 +1,6 @@
-module fsharper.moreType.Pipable
+module fsharper.types.Pipable
 
-open fsharper.moreType.GenericPipable
+open fsharper.types.GenericPipable
 
 
 type Pipable<'T> =

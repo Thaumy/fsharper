@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module fsharper.moreType.Cons
+module fsharper.types.Cons
 
 open System
 open fsharper.typeExt.Object
@@ -30,11 +30,14 @@ let rec foldr f acc cons =
 let inline concat cons = foldl append Nil cons
 
 type Cons<'t> with
+    //Functor
     member self.fmap f =
         match self with
         | Cons (x, xs) -> Cons(f x, xs.fmap f)
         | Nil -> Nil
 
+    
+    //Applicative
     static member inline ap(ma: Cons<'a -> 'b>, mb: Cons<'a>) =
         let rec ap ma mb =
             match ma, mb with
@@ -44,8 +47,10 @@ type Cons<'t> with
 
         ap ma mb
 
+    //Monad
     member inline self.bind f = self.fmap f |> concat
 
+    //Boxing
     static member inline warp x = Cons(x, Nil)
 
     member self.unwarp() =

@@ -1,8 +1,8 @@
 [<AutoOpen>]
 module fsharper.op.Foldable
 
-open fsharper.moreType.Dual
-open fsharper.moreType.Endo
+open fsharper.types.Dual
+open fsharper.types.Endo
 
 
 let inline private runFoldMap f t =

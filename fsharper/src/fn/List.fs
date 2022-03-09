@@ -2,8 +2,7 @@
 module fsharper.fn.List
 
 open fsharper.op
-open fsharper.enhType
-open fsharper.moreType
+open fsharper.types
 
 
 let inline head list =

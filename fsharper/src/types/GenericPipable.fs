@@ -1,4 +1,4 @@
-module fsharper.moreType.GenericPipable
+module fsharper.types.GenericPipable
 
 
 type GenericPipable<'I, 'O> =

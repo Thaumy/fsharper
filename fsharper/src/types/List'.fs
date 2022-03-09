@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module fsharper.enhType.enhList
+module fsharper.types.List'
 
 open fsharper.typeExt
 
@@ -37,11 +37,15 @@ type List'<'a>(init: 'a list) =
 
         ap ma.list mb.list |> List'
 
+    static member inline ``pure`` x = List' [ x ]
+
     //Monad
     member self.bind(f: 'a -> 'b List') : 'b List' =
         let f' x = (f x).list
 
         map f' self.list |> concat |> List'
+
+    static member inline unit x = List'<_>.``pure`` x
 
     //Semigroup
     member self.mappend(mb: List'<'a>) = (self.list @ mb.list) |> List'
@@ -49,7 +53,8 @@ type List'<'a>(init: 'a list) =
     //Monoid
     member self.mempty = list<'a>.Empty
 
-    static member inline warp x = List' [ x ]
+    //Boxing
+    static member inline warp x = List'<_>.``pure`` x
 
     member self.unwarp() = self.list
 

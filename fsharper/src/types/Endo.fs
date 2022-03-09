@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module fsharper.moreType.Endo
+module fsharper.types.Endo
 
 
 type Endo<'a> = Endo of appEndo: ('a -> 'a)

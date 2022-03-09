@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module fsharper.moreType.Dual
+module fsharper.types.Dual
 
 
 type Dual<'a> = Dual of getDual: 'a
