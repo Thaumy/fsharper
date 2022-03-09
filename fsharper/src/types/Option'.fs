@@ -11,6 +11,7 @@ type Option'<'a> =
     | Some of 'a
     | None
 
+type Option'<'a> with
     //Functor
     member inline self.fmap f =
         match self with
@@ -33,6 +34,7 @@ type Option'<'a> =
 
     static member inline unit x = Option'<_>.``pure`` x
 
+type Option'<'a> with
     //Boxing
     static member inline warp x = Option'<_>.``pure`` x
 

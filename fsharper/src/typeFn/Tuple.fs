@@ -2,9 +2,9 @@
 module rec fsharper.fn.Tuple
 
 
-let car (x, _) = x
+let car = fst
 
-let cdr (_, x) = x
+let cdr = snd
 
 let cadr x = car <| cdr x
 

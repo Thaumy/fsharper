@@ -1,8 +1,9 @@
 ﻿[<AutoOpen>]
-module rec fsharper.fn.List
+module fsharper.fn.List
 
 open fsharper.op.Casting
 open fsharper.types
+
 
 let inline head list =
     match list with
@@ -24,8 +25,6 @@ let rec map f list =
     match list with
     | x :: xs -> (f x) :: map f xs
     | [] -> []
-
-//TODO let flatMap
 
 let rec mapOn<'a, 't> (f: 't -> 'a) (list: 'a list) =
     match list with
@@ -59,6 +58,8 @@ let inline any p list =
 let inline elem x list = any (eq x) list
 
 let inline concat list = foldr (@) [] list
+
+let flatMap f list = map f list |> concat
 
 let inline leftJoinNoInnerWhen p ls rs =
     filter (fun l -> not <| any (p l) rs) ls

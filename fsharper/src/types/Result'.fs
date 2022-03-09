@@ -9,6 +9,7 @@ type Result'<'a, 'e> =
     | Ok of 'a
     | Err of 'e
 
+type Result'<'a, 'e> with
     //Functor
     member inline self.fmap f =
         match self with

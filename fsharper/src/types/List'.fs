@@ -21,9 +21,9 @@ let inline private concat list = foldr (@) [] list
 
 type List'<'a>(init: 'a list) =
     new() = List' []
-
     member private self.list: 'a list = init
 
+type List'<'a> with
     //Functor
     member self.fmap(f: 'a -> 'b) = map f self.list |> List'
 
@@ -47,12 +47,14 @@ type List'<'a>(init: 'a list) =
 
     static member inline unit x = List'<_>.``pure`` x
 
+type List'<'a> with
     //Semigroup
     member self.mappend(mb: List'<'a>) = (self.list @ mb.list) |> List'
 
     //Monoid
     member self.mempty = list<'a>.Empty
 
+type List'<'a> with
     //Boxing
     static member inline warp x = List'<_>.``pure`` x
 

@@ -36,7 +36,7 @@ type Cons<'t> with
         | Cons (x, xs) -> Cons(f x, xs.fmap f)
         | Nil -> Nil
 
-    
+
     //Applicative
     static member inline ap(ma: Cons<'a -> 'b>, mb: Cons<'a>) =
         let rec ap ma mb =
@@ -50,6 +50,7 @@ type Cons<'t> with
     //Monad
     member inline self.bind f = self.fmap f |> concat
 
+type Cons<'t> with
     //Boxing
     static member inline warp x = Cons(x, Nil)
 
