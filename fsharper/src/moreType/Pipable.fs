@@ -1,7 +1,7 @@
 module fsharper.moreType.Pipable
 
-open fsharper.moreType
 open fsharper.moreType.GenericPipable
+
 
 type Pipable<'T> =
     inherit GenericPipable<'T, 'T>

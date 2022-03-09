@@ -1,9 +1,14 @@
 ﻿[<AutoOpen>]
 module fsharper.fn.Tuple
 
+
 let car (x, _) = x
 
 let cdr (_, x) = x
+
+let cadr x = car <| cdr x
+
+let cdar x = cdr <| car x
 
 let inline fst3 (x, _, _) = x
 

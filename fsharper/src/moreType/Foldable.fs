@@ -4,6 +4,7 @@ module fsharper.op.Foldable
 open fsharper.moreType.Dual
 open fsharper.moreType.Endo
 
+
 let inline private runFoldMap f t =
     (^t: (member foldMap : (^a -> ^m) -> ^m) t, f)
 

@@ -6,20 +6,24 @@ open fsharper.typeExt
 /// 尝试拆箱None错误
 exception TryToUnwarpNone
 
+
 type Option'<'a> =
     | Some of 'a
     | None
 
+    //Functor
     member inline self.fmap f =
         match self with
         | Some a -> f a |> Some
         | None -> None
 
+    //Applicative
     static member inline ap(ma: Option'<'a -> 'b>, mb: Option'<'a>) =
         match ma, mb with
         | None, _ -> None
         | Some f, _ -> mb.fmap f
 
+    //Monad
     member inline self.bind f =
         match self with
         | None -> None

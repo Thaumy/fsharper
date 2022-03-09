@@ -4,20 +4,24 @@ module fsharper.enhType.enhResult
 open System
 open fsharper.typeExt
 
+
 type Result'<'a, 'e> =
     | Ok of 'a
     | Err of 'e
 
+    //Functor
     member inline self.fmap f =
         match self with
         | Ok x -> f x |> Ok
         | Err e -> Err e
 
+    //Applicative
     static member inline ap(ma: Result'<'a -> 'b, 'e>, mb: Result'<'a, 'e>) =
         match ma, mb with
         | Err e, _ -> Err e
         | Ok f, _ -> mb.fmap f
 
+    //Monad
     member self.bind f =
         match self with
         | Err e -> Err e

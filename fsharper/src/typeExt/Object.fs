@@ -4,6 +4,7 @@ module fsharper.typeExt.Object
 open System
 open fsharper.op
 
+
 type Object with
 
     member self.tryInvoke(methodName, para) =

@@ -5,6 +5,7 @@ open fsharper.op
 open fsharper.enhType
 open fsharper.moreType
 
+
 let inline head list =
     match list with
     | x :: _ -> Some x
@@ -25,6 +26,8 @@ let rec map f list =
     match list with
     | x :: xs -> (f x) :: map f xs
     | [] -> []
+
+//TODO let flatMap 
 
 let rec mapOn<'a, 't> (f: 't -> 'a) (list: 'a list) =
     match list with

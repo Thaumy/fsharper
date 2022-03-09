@@ -1,6 +1,5 @@
 module fsharper.moreType.GenericPipable
 
-open fsharper.moreType
 
 type GenericPipable<'I, 'O> =
     abstract invoke : 'I -> 'O
