@@ -50,9 +50,7 @@ let rec foldr f acc list =
     | [] -> acc
 
 let rec foldl f acc list =
-    match list with
-    | x :: xs -> foldl f (f acc x) xs
-    | [] -> acc
+    foldr (fun x g acc' -> g (f acc' x)) id list acc
 
 let inline any p list =
     foldl (fun acc it -> p it || acc) false list
