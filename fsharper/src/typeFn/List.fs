@@ -1,9 +1,8 @@
 ﻿[<AutoOpen>]
-module fsharper.fn.List
+module rec fsharper.fn.List
 
-open fsharper.op
+open fsharper.op.Casting
 open fsharper.types
-
 
 let inline head list =
     match list with
@@ -26,7 +25,7 @@ let rec map f list =
     | x :: xs -> (f x) :: map f xs
     | [] -> []
 
-//TODO let flatMap 
+//TODO let flatMap
 
 let rec mapOn<'a, 't> (f: 't -> 'a) (list: 'a list) =
     match list with

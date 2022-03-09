@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module fsharper.fn.Function
+module rec fsharper.fn.Procedure
 
 
 let inline flip f a b = f b a

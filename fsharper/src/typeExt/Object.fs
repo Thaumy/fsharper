@@ -2,8 +2,9 @@
 module fsharper.typeExt.Object
 
 open System
-open fsharper.op
 
+let inline internal cast (a: 'a) : 'b =
+    downcast Convert.ChangeType(a, typeof<'b>)
 
 type Object with
 

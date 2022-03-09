@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module fsharper.fn.Tuple
+module rec fsharper.fn.Tuple
 
 
 let car (x, _) = x

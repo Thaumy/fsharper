@@ -31,6 +31,7 @@ type Result'<'a, 'e> =
 
     static member inline unit x = Result'<_, _>.``pure`` x
 
+type Result'<'a, 'e> with
     //Boxing
     static member inline warp x = Result'<_, _>.``pure`` x
 
@@ -64,25 +65,3 @@ type Result'<'a, 'e> =
                 | _ -> e.ToString()
 
             $"Err {msg}"
-
-
-(*
-        member self.debug() =
-            "["
-            + (foldr
-                (fun x acc ->
-                    let str =
-                        try
-                            x
-                                .GetType()
-                                .GetMethod("debug")
-                                .Invoke(x, [||])
-                                .ToString()
-                        with
-                        | _ -> x.ToString()
-
-                    $"; {str}{acc}")
-                " ]"
-                self.list)
-                .Remove(0, 1)
-*)
