@@ -1,14 +1,14 @@
 [<AutoOpen>]
-module fsharper.op.Foldable
+module rec fsharper.op.Foldable
 
 open fsharper.types.Dual
 open fsharper.types.Endo
 
 
-let inline private runFoldMap f t =
+let inline runFoldMap f t =
     (^t: (member foldMap : (^a -> ^m) -> ^m) t, f)
 
-let inline private runFoldr f acc t =
+let inline runFoldr f acc t =
     (^t: (member foldr : (^a -> ^b -> ^b) -> ^b -> ^b) t, f, acc)
 
 let inline fold t = runFoldMap id t

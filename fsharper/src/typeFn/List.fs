@@ -21,10 +21,7 @@ let rec last list =
     | [ x ] -> Some x
     | _ :: xs -> last xs
 
-let rec map f list =
-    match list with
-    | x :: xs -> (f x) :: map f xs
-    | [] -> []
+let rec map = List'.map
 
 let rec mapOn<'a, 't> (f: 't -> 'a) (list: 'a list) =
     match list with
@@ -44,20 +41,16 @@ let rec take n list =
     | [] -> []
     | x :: xs -> x :: take (n - 1) xs
 
-let rec foldr f acc list =
-    match list with
-    | x :: xs -> f x (foldr f acc xs)
-    | [] -> acc
+let rec foldr = List'.foldr
 
-let rec foldl f acc list =
-    foldr (fun x g acc' -> g (f acc' x)) id list acc
+let rec foldl = List'.foldl
 
 let inline any p list =
     foldl (fun acc it -> p it || acc) false list
 
 let inline elem x list = any (eq x) list
 
-let inline concat list = foldr (@) [] list
+let concat = List'.concat
 
 let flatMap f list = map f list |> concat
 

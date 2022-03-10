@@ -19,7 +19,7 @@ type Option'<'a> with
         | None -> None
 
     //Applicative
-    static member inline ap(ma: Option'<'a -> 'b>, mb: Option'<'a>) =
+    static member inline ap(ma: Option'<'x -> 'y>, mb: Option'<'x>) =
         match ma, mb with
         | None, _ -> None
         | Some f, _ -> mb.fmap f

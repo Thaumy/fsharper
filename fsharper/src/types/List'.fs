@@ -2,22 +2,23 @@
 module fsharper.types.List'
 
 open fsharper.typeExt
+open fsharper.types
 
 
-let rec private map f list =
+let rec internal map f list =
     match list with
     | x :: xs -> (f x) :: map f xs
     | [] -> []
 
-let rec foldr f acc list =
+let rec internal foldr f acc list =
     match list with
     | x :: xs -> f x (foldr f acc xs)
     | [] -> acc
 
-let rec foldl f acc list =
+let rec internal foldl f acc list =
     foldr (fun x g acc' -> g (f acc' x)) id list acc
 
-let inline private concat list = foldr (@) [] list
+let inline internal concat list = foldr (@) [] list
 
 type List'<'a>(init: 'a list) =
     new() = List' []
@@ -28,7 +29,7 @@ type List'<'a> with
     member self.fmap(f: 'a -> 'b) = map f self.list |> List'
 
     //Applicative
-    static member ap(ma: List'<'a -> 'b>, mb: List'<'a>) =
+    static member ap(ma: List'<'x -> 'y>, mb: List'<'x>) =
         let rec ap lfs lxs =
             match lfs, lxs with
             | [], _ -> []
@@ -52,7 +53,13 @@ type List'<'a> with
     member self.mappend(mb: List'<'a>) = (self.list @ mb.list) |> List'
 
     //Monoid
-    member self.mempty = list<'a>.Empty
+    static member mempty = list<'a>.Empty |> List'
+
+type List'<'a> with
+    //Foldable
+    //member self.foldMap f = map f self.list |> concat
+    member self.foldr (f: 'a -> 'b -> 'b) (acc: 'b) = foldr f acc self.list
+//static member foldr f acc (t: List'<_>) = foldr f acc t.list
 
 type List'<'a> with
     //Boxing

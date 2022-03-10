@@ -17,7 +17,7 @@ type Result'<'a, 'e> with
         | Err e -> Err e
 
     //Applicative
-    static member inline ap(ma: Result'<'a -> 'b, 'e>, mb: Result'<'a, 'e>) =
+    static member inline ap(ma: Result'<'x -> 'y, 'e0>, mb: Result'<'x, 'e0>) =
         match ma, mb with
         | Err e, _ -> Err e
         | Ok f, _ -> mb.fmap f

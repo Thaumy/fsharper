@@ -7,9 +7,9 @@ open fsharper.typeExt.Object
 exception TryToUnwarpNil
 
 
-type Cons<'t> =
+type Cons<'a> =
     | Nil
-    | Cons of car: 't * cdr: Cons<'t>
+    | Cons of car: 'a * cdr: Cons<'a>
 
 let rec append ca cb =
     match ca, cb with
@@ -29,7 +29,7 @@ let rec foldr f acc cons =
 
 let inline concat cons = foldl append Nil cons
 
-type Cons<'t> with
+type Cons<'a> with
     //Functor
     member self.fmap f =
         match self with
@@ -38,7 +38,7 @@ type Cons<'t> with
 
 
     //Applicative
-    static member inline ap(ma: Cons<'a -> 'b>, mb: Cons<'a>) =
+    static member inline ap(ma: Cons<'x -> 'y>, mb: Cons<'x>) =
         let rec ap ma mb =
             match ma, mb with
             | Nil, _ -> Nil

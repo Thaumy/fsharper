@@ -3,4 +3,4 @@ module fsharper.op.Semigroup
 
 
 let inline mappend ma mb =
-    (^m: (static member mappend : ^m -> ^m -> ^m) ma, mb)
+    (^m: (member mappend : ^m -> ^m) ma, mb)
