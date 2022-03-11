@@ -1,28 +1,13 @@
 [<AutoOpen>]
 module fsharper.types.List'
 
-open fsharper.typeExt
-open fsharper.types
-
-
-let rec internal map f list =
-    match list with
-    | x :: xs -> (f x) :: map f xs
-    | [] -> []
-
-let rec internal foldr f acc list =
-    match list with
-    | x :: xs -> f x (foldr f acc xs)
-    | [] -> acc
-
-let rec internal foldl f acc list =
-    foldr (fun x g acc' -> g (f acc' x)) id list acc
-
-let inline internal concat list = foldr (@) [] list
+open fsharper.types.Object
+open fsharper.op
+open fsharper.types.List
 
 type List'<'a>(init: 'a list) =
     new() = List' []
-    member private self.list: 'a list = init
+    member self.list: 'a list = init
 
 type List'<'a> with
     //Functor
@@ -57,8 +42,9 @@ type List'<'a> with
 
 type List'<'a> with
     //Foldable
-    member self.foldMap f = map f self.list |> concat
-//member self.foldr(f, acc) = foldr f acc self.list
+    member inline self.foldMap f = map f self.list |> foldr mappend mempty
+
+    member inline self.foldr(f, acc) = foldr f acc self.list
 
 type List'<'a> with
     //Boxing

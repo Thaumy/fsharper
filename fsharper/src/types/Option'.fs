@@ -1,7 +1,7 @@
 ﻿[<AutoOpen>]
 module fsharper.types.Option'
 
-open fsharper.typeExt
+open fsharper.types.Object
 
 /// 尝试拆箱None错误
 exception TryToUnwarpNone

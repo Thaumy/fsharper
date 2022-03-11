@@ -2,7 +2,7 @@
 module fsharper.types.Result'
 
 open System
-open fsharper.typeExt
+open fsharper.types.Object
 
 
 type Result'<'a, 'e> =

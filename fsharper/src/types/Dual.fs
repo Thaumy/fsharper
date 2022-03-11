@@ -1,8 +1,6 @@
 [<AutoOpen>]
 module fsharper.types.Dual
 
-open fsharper.types
-
 type Dual<'a> = Dual of getDual: 'a
 
 let inline mappend ma mb =
