@@ -8,16 +8,16 @@
 
     <ItemGroup>
         <Compile Include="src\typeExt\Object.fs" />
-        
-        <Compile Include="src\types\Ord.fs" />
-        <Compile Include="src\types\Option'.fs" />
-        <Compile Include="src\types\Result'.fs" />
-        <Compile Include="src\types\List'.fs" />
-        <Compile Include="src\types\Cons.fs" />
-        <Compile Include="src\types\Dual.fs" />
-        <Compile Include="src\types\Endo.fs" />
-        <Compile Include="src\types\GenericPipable.fs" />
-        <Compile Include="src\types\Pipable.fs" />
+       
+        <Compile Include="src\types\Ord.fs"/>
+        <Compile Include="src\types\Option'.fs"/>
+        <Compile Include="src\types\Result'.fs"/>
+        <Compile Include="src\types\List'.fs"/>
+        <Compile Include="src\types\Cons.fs"/>
+        <Compile Include="src\types\Dual.fs"/>
+        <Compile Include="src\types\Endo.fs"/>
+        <Compile Include="src\types\GenericPipable.fs"/>
+        <Compile Include="src\types\Pipable.fs"/>
 
         <Compile Include="src\op\Casting.fs" />
         <Compile Include="src\op\Boxing.fs" />

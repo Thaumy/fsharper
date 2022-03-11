@@ -53,13 +53,12 @@ type List'<'a> with
     member self.mappend(mb: List'<'a>) = (self.list @ mb.list) |> List'
 
     //Monoid
-    static member mempty = list<'a>.Empty |> List'
+    static member mempty() = list<'a>.Empty |> List'
 
 type List'<'a> with
     //Foldable
-    //member self.foldMap f = map f self.list |> concat
-    member self.foldr (f: 'a -> 'b -> 'b) (acc: 'b) = foldr f acc self.list
-//static member foldr f acc (t: List'<_>) = foldr f acc t.list
+    member self.foldMap f = map f self.list |> concat
+//member self.foldr(f, acc) = foldr f acc self.list
 
 type List'<'a> with
     //Boxing
