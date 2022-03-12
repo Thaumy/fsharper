@@ -1,6 +1,5 @@
 namespace fsharper.types
 
-[<AutoOpen>]
 module Cons =
 
     open System
