@@ -1,4 +1,3 @@
-[<AutoOpen>]
 module fsharper.types.Endo
 
 open fsharper.types.Object

@@ -1,5 +1,4 @@
-﻿[<AutoOpen>]
-module fsharper.types.Ord
+﻿module fsharper.types.Ord
 
 
 type Ordering =
