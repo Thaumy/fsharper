@@ -3,7 +3,7 @@ module fsharper.types.List
 
 [<AutoOpen>]
 module fn =
-    open fsharper.op.Casting
+    open fsharper.op.Coerce
     open fsharper.types.Ord
     open fsharper.types.Procedure
 
@@ -30,7 +30,7 @@ module fn =
 
     let rec mapOn<'a, 't> (f: 't -> 'a) (list: 'a list) =
         match list with
-        | x :: xs when is<'t> x -> (cast x |> f) :: mapOn<'a, 't> f xs
+        | x :: xs when is<'t> x -> (coerce x |> f) :: mapOn<'a, 't> f xs
         | x :: xs -> x :: mapOn<'a, 't> f xs
         | [] -> []
 
