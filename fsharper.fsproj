@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <Compile Include="src\op\Coerce.fs" />
+        <Compile Include="src\op\Lazy.fs" />
         <Compile Include="src\op\Boxing.fs" />
         <Compile Include="src\op\Debug.fs" />
         <Compile Include="src\op\Functor.fs" />
@@ -30,7 +31,9 @@
         <Compile Include="src\types\Dual.fs" />
         <Compile Include="src\types\Endo.fs" />
         <Compile Include="src\types\GenericPipable.fs" />
+        <Compile Include="src\types\GenericStatePipable.fs" />
         <Compile Include="src\types\Pipable.fs" />
+        <Compile Include="src\types\StatePipable.fs" />
     </ItemGroup>
 
 </Project>

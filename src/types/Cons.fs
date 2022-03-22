@@ -50,6 +50,17 @@ module Cons =
         //Monad
         member inline self.bind f = self.fmap f |> concat
 
+    type Cons<'a> with
+        //Semigroup
+        member self.mappend(mb: Cons<'a>) =
+            match self, mb with
+            | Nil, _ -> mb
+            | _, Nil -> self
+            | Cons (x, xs), _ -> Cons(x, xs.mappend mb)
+
+        //Monoid
+        static member mempty() = Nil
+
     type Cons<'t> with
         //Boxing
         static member inline warp x = Cons(x, Nil)

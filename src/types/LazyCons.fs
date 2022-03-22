@@ -5,15 +5,13 @@ module LazyCons =
 
     open System
     open fsharper.types.Object
+    open fsharper.op.Lazy
 
     exception TryToUnwarpLazyNil
 
-    let private delay v = fun () -> v
-    let private force v = v ()
-
     type LazyCons<'a> =
         | LazyNil
-        | LazyCons of car: 'a * cdr: (unit -> LazyCons<'a>)
+        | LazyCons of car: 'a * cdr: delayed<LazyCons<'a>>
 
     let rec append ca cb =
         match ca, cb with
@@ -52,6 +50,17 @@ module LazyCons =
 
         //Monad
         member inline self.bind f = self.fmap f |> concat
+
+    type LazyCons<'a> with
+        //Semigroup
+        member self.mappend(mb: LazyCons<'a>) =
+            match self, mb with
+            | LazyNil, _ -> mb
+            | _, LazyNil -> self
+            | LazyCons (x, xs), _ -> LazyCons(x, delay <| (force xs).mappend mb)
+
+        //Monoid
+        static member mempty() = LazyNil
 
     type LazyCons<'t> with
         //Boxing

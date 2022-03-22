@@ -2,7 +2,6 @@ module fsharper.types.Pipable
 
 open fsharper.types.GenericPipable
 
-
 type Pipable<'T> =
     inherit GenericPipable<'T, 'T>
 
@@ -19,26 +18,9 @@ type Pipe<'T> internal (beforeInvoked: 'T -> 'T) =
 
     member val func: 'T -> 'T = id with get, set
 
-type StatePipe<'T> private (beforeInvoked: 'T -> 'T) as self =
-    [<DefaultValue>]
-    val mutable func: 'T -> 'T
+type Pipe<'T> with
+    //Semigroup
+    member self.mappend(mb: Pipe<'T>) = self |> mb.import
 
-    interface Pipable<'T> with
-        member self.invoke(arg: 'T) = arg |> beforeInvoked |> self.func
-
-    do
-        self.func <-
-            fun arg ->
-                self.func <- self.activated
-
-                arg |> self.activate
-
-    new() = StatePipe(id)
-
-    member self.build() = self :> Pipable<'T>
-
-    member self.import(pipable: Pipable<'T>) =
-        StatePipe<'T>(pipable.invoke, activate = self.activate, activated = self.activated)
-
-    member val activate: 'T -> 'T = id with get, set
-    member val activated: 'T -> 'T = id with get, set
+    //Monoid
+    static member mempty() = Pipe<'T>()
