@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <WarnOn>3390;$(WarnOn)</WarnOn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="src\op\Coerce.fs" />
+        <Compile Include="src\op\Lazy.fs" />
+        <Compile Include="src\op\Boxing.fs" />
+        <Compile Include="src\op\Debug.fs" />
+        <Compile Include="src\op\Functor.fs" />
+        <Compile Include="src\op\Applicative.fs" />
+        <Compile Include="src\op\Monad.fs" />
+        <Compile Include="src\op\Semigroup.fs" />
+        <Compile Include="src\op\Monoid.fs" />
+        <Compile Include="src\op\Foldable.fs" />
+
+        <Compile Include="src\types\Object.fs" />
+        <Compile Include="src\types\Procedure.fs" />
+        <Compile Include="src\types\Tuple.fs" />
+        <Compile Include="src\types\Ord.fs" />
+        <Compile Include="src\types\Option'.fs" />
+        <Compile Include="src\types\Result'.fs" />
+        <Compile Include="src\types\List.fs" />
+        <Compile Include="src\types\List'.fs" />
+        <Compile Include="src\types\Cons.fs" />
+        <Compile Include="src\types\LazyCons.fs" />
+        <Compile Include="src\types\Dual.fs" />
+        <Compile Include="src\types\Endo.fs" />
+        <Compile Include="src\types\Pipe\GenericPipable.fs" />
+        <Compile Include="src\types\Pipe\GenericStatePipable.fs" />
+        <Compile Include="src\types\Pipe\Pipable.fs" />
+        <Compile Include="src\types\Pipe\StatePipable.fs" />
+    </ItemGroup>
+
+</Project>
