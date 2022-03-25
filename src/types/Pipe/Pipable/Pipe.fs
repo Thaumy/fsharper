@@ -1,9 +1,4 @@
-module fsharper.types.Pipable
-
-open fsharper.types.GenericPipable
-
-type Pipable<'T> =
-    inherit GenericPipable<'T, 'T>
+namespace fsharper.types.Pipe.Pipable
 
 type Pipe<'T> internal (beforeInvoked: 'T -> 'T) =
     interface Pipable<'T> with

@@ -11,7 +11,7 @@ module LazyCons =
 
     type LazyCons<'a> =
         | LazyNil
-        | LazyCons of car: 'a * cdr: delayed<LazyCons<'a>>
+        | LazyCons of car: 'a * cdr: Delayed<LazyCons<'a>>
 
     let rec append ca cb =
         match ca, cb with

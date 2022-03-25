@@ -30,10 +30,12 @@
         <Compile Include="src\types\LazyCons.fs" />
         <Compile Include="src\types\Dual.fs" />
         <Compile Include="src\types\Endo.fs" />
-        <Compile Include="src\types\GenericPipable.fs" />
-        <Compile Include="src\types\GenericStatePipable.fs" />
-        <Compile Include="src\types\Pipable.fs" />
-        <Compile Include="src\types\StatePipable.fs" />
+        <Compile Include="src\types\Pipe\GenericPipable\GenericPipable.fs" />
+        <Compile Include="src\types\Pipe\GenericPipable\GenericPipe.fs" />
+        <Compile Include="src\types\Pipe\GenericPipable\GenericStatePipe.fs" />
+        <Compile Include="src\types\Pipe\Pipable\Pipable.fs" />
+        <Compile Include="src\types\Pipe\Pipable\Pipe.fs" />
+        <Compile Include="src\types\Pipe\Pipable\StatePipe.fs" />
     </ItemGroup>
 
 </Project>

@@ -1,9 +1,6 @@
-module fsharper.types.GenericPipable
+namespace fsharper.types.Pipe.GenericPipable
 
 open fsharper.op.Coerce
-
-type GenericPipable<'I, 'O> =
-    abstract invoke : 'I -> 'O
 
 type GenericPipe<'I, 'O>(func: 'I -> 'O) =
 
