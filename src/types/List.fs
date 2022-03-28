@@ -2,10 +2,22 @@
 module fsharper.types.List
 
 [<AutoOpen>]
+module ext =
+
+    type 'a List with
+
+        member self.toArray() = self |> Array.ofList
+
+[<AutoOpen>]
 module fn =
+    open fsharper.op
+    open fsharper.op.Boxing
     open fsharper.op.Coerce
     open fsharper.types.Ord
     open fsharper.types.Procedure
+    open fsharper.op.Semigroup
+    open fsharper.op.Monoid
+
 
     let inline head list =
         match list with
@@ -23,22 +35,19 @@ module fn =
         | [ x ] -> Some x
         | _ :: xs -> last xs
 
-    let rec map f list =
+    let rec map f list = (List' list).fmap f |> unwarp
+
+    let rec mapOn<'x, 't> (f: 't -> 'x) (list: 'x list) =
         match list with
-        | x :: xs -> (f x) :: map f xs
+        | x :: xs when x.is<'t> () -> (coerce x |> f) :: mapOn<'x, 't> f xs
+        | x :: xs -> x :: mapOn<'x, 't> f xs
         | [] -> []
 
-    let rec mapOn<'a, 't> (f: 't -> 'a) (list: 'a list) =
-        match list with
-        | x :: xs when is<'t> x -> (coerce x |> f) :: mapOn<'a, 't> f xs
-        | x :: xs -> x :: mapOn<'a, 't> f xs
-        | [] -> []
+    let inline foldMap (f: 'a -> 'foldable) (list: 'a list) = Foldable.foldMap f (List' list)
 
-    let rec filter p list =
-        match list with
-        | x :: xs when p x -> x :: filter p xs
-        | _ :: xs -> filter p xs
-        | [] -> []
+    let inline foldr f (acc: 'acc) (list: 'a list) = Foldable.foldr f acc (List' list)
+
+    let inline foldl f (acc: 'acc) (list: 'a list) = Foldable.foldl f acc (List' list)
 
     let rec take n list =
         match list with
@@ -46,13 +55,11 @@ module fn =
         | [] -> []
         | x :: xs -> x :: take (n - 1) xs
 
-    let rec foldr f acc list =
-        match list with
-        | x :: xs -> f x (foldr f acc xs)
-        | [] -> acc
+    let rec filter p list =
+        let f =
+            fun acc x -> if p x then x :: acc else acc
 
-    let rec foldl f acc list =
-        foldr (fun x g acc' -> g (f acc' x)) id list acc
+        (List' list).foldl (f, [])
 
     let inline any p list =
         foldl (fun acc it -> p it || acc) false list

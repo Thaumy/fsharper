@@ -1,14 +1,14 @@
 [<AutoOpen>]
 module fsharper.types.Object
 
-open fsharper.op
-
 [<AutoOpen>]
 module ext =
     open System
     open fsharper.op.Coerce
 
     type Object with
+
+        member self.is<'b>() = is<'b> self
 
         member self.cast() = self |> coerce
 
