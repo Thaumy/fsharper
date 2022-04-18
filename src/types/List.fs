@@ -35,6 +35,12 @@ module fn =
         | [ x ] -> Some x
         | _ :: xs -> last xs
 
+    let rec zip a b =
+        match a, b with
+        | [], _ -> []
+        | _, [] -> []
+        | x :: xs, y :: ys -> (x, y) :: zip xs ys
+
     let rec map f list = (List' list).fmap f |> unwarp
 
     let rec mapOn<'x, 't> (f: 't -> 'x) (list: 'x list) =
@@ -61,6 +67,11 @@ module fn =
 
         (List' list).foldl (f, [])
 
+    let rec filterOne p list =
+        match list with
+        | x :: xs -> if p x then Some x else filterOne p xs
+        | [] -> None
+
     let inline any p list =
         foldl (fun acc it -> p it || acc) false list
 
@@ -68,7 +79,9 @@ module fn =
 
     let inline concat list = foldr (@) [] list
 
-    let flatMap f list = map f list |> concat
+    let inline flatMap f list =
+        let f' x = x |> f |> List'
+        (List' list).foldMap f' |> unwarp
 
     let inline leftJoinNoInnerWhen p ls rs =
         filter (fun l -> not <| any (p l) rs) ls

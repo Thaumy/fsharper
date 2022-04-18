@@ -17,9 +17,10 @@
         <Compile Include="src\op\Semigroup.fs" />
         <Compile Include="src\op\Monoid.fs" />
         <Compile Include="src\op\Foldable.fs" />
-        <Compile Include="src\types\Object.fs" />
 
         <Compile Include="src\types\Array.fs" />
+
+        <Compile Include="src\types\Reflection.fs" />
         <Compile Include="src\types\Procedure.fs" />
         <Compile Include="src\types\Tuple.fs" />
         <Compile Include="src\types\Ord.fs" />
