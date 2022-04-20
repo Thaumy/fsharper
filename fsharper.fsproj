@@ -17,6 +17,7 @@
         <Compile Include="src\op\Semigroup.fs" />
         <Compile Include="src\op\Monoid.fs" />
         <Compile Include="src\op\Foldable.fs" />
+        <Compile Include="src\op\IO.fs" />
 
         <Compile Include="src\types\Array.fs" />
 
