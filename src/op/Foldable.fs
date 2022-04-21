@@ -1,6 +1,4 @@
-[<AutoOpen>]
 module fsharper.op.Foldable
-
 
 let inline foldMap f t =
     (^t: (member foldMap : (^a -> ^m) -> ^m) t, f)
@@ -8,6 +6,8 @@ let inline foldMap f t =
 let inline foldr f acc t =
     (^t: (member foldr : (^a -> ^acc -> ^acc) * ^acc -> ^acc) t, f, acc)
 
+let inline foldl f acc t =
+    (^t: (member foldl : (^acc -> ^a -> ^acc) * ^acc -> ^acc) t, f, acc)
 
 //TODO
 

@@ -11,13 +11,13 @@ module LazyCons =
 
     type LazyCons<'a> =
         | LazyNil
-        | LazyCons of car: 'a * cdr: Delayed<LazyCons<'a>>
+        | LazyCons of car: 'a * cdr: Lazy<LazyCons<'a>>
 
     let rec append ca cb =
         match ca, cb with
         | LazyNil, _ -> cb
         | _, LazyNil -> ca
-        | LazyCons (x, xs), _ -> LazyCons(x, delay <| append (force xs) cb)
+        | LazyCons (x, xs), _ -> LazyCons(x, lazy (append (force xs) cb))
 
     let rec foldl f acc cons =
         match cons with
@@ -35,7 +35,7 @@ module LazyCons =
         //Functor
         member self.fmap f =
             match self with
-            | LazyCons (x, xs) -> LazyCons(f x, delay <| (force xs).fmap f)
+            | LazyCons (x, xs) -> LazyCons(f x, lazy ((force xs).fmap f))
             | LazyNil -> LazyNil
 
         //Applicative
@@ -44,7 +44,7 @@ module LazyCons =
                 match ma, mb with
                 | LazyNil, _ -> LazyNil
                 | _, LazyNil -> LazyNil
-                | LazyCons (f, fs), LazyCons (x, xs) -> LazyCons(f x, delay <| ap (force fs) (force xs))
+                | LazyCons (f, fs), LazyCons (x, xs) -> LazyCons(f x, lazy (ap (force fs) (force xs)))
 
             ap ma mb
 
@@ -57,14 +57,14 @@ module LazyCons =
             match self, mb with
             | LazyNil, _ -> mb
             | _, LazyNil -> self
-            | LazyCons (x, xs), _ -> LazyCons(x, delay <| (force xs).mappend mb)
+            | LazyCons (x, xs), _ -> LazyCons(x, lazy ((force xs).mappend mb))
 
         //Monoid
         static member mempty() = LazyNil
 
     type LazyCons<'t> with
         //Boxing
-        static member inline warp x = LazyCons(x, delay LazyNil)
+        static member inline warp x = LazyCons(x, lazy (LazyNil))
 
         member self.unwarp() =
             match self with
@@ -93,7 +93,7 @@ module LazyCons =
             let rec withCount count =
                 match count with
                 | i when i = max -> LazyNil
-                | i -> LazyCons(arr.[i], delay <| withCount (count + 1))
+                | i -> LazyCons(arr.[i], lazy (withCount (count + 1)))
 
             withCount 0
 

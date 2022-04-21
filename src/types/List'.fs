@@ -1,9 +1,11 @@
 [<AutoOpen>]
 module fsharper.types.List'
 
-open fsharper.types.Object
 open fsharper.op
-open fsharper.types.List
+open fsharper.types.Object
+
+//由于RFC FS-1043尚未完成，为List扩展方法的约束不得不通过包装类完成
+//但貌似可以通过辅助函数补充+静态约束的方式来隐藏这一问题
 
 type List'<'a>(init: 'a list) =
     new() = List' []
@@ -11,10 +13,16 @@ type List'<'a>(init: 'a list) =
 
 type List'<'a> with
     //Functor
-    member self.fmap(f: 'a -> 'b) = map f self.list |> List'
+    member self.fmap(f: 'a -> 'b) =
+        let rec map f list =
+            match list with
+            | x :: xs -> (f x) :: map f xs
+            | [] -> []
+
+        map f self.list |> List'
 
     //Applicative
-    static member ap(ma: List'<'x -> 'y>, mb: List'<'x>) =
+    static member ap(ma: ('x -> 'y) List', mb: 'x List') =
         let rec ap lfs lxs =
             match lfs, lxs with
             | [], _ -> []
@@ -25,14 +33,6 @@ type List'<'a> with
 
     static member inline ``pure`` x = List' [ x ]
 
-    //Monad
-    member self.bind(f: 'a -> 'b List') : 'b List' =
-        let f' x = (f x).list
-
-        map f' self.list |> concat |> List'
-
-    static member inline unit x = List'<_>.``pure`` x
-
 type List'<'a> with
     //Semigroup
     member self.mappend(mb: List'<'a>) = (self.list @ mb.list) |> List'
@@ -42,9 +42,28 @@ type List'<'a> with
 
 type List'<'a> with
     //Foldable
-    member inline self.foldMap f = map f self.list |> foldr mappend mempty
 
-    member inline self.foldr(f, acc) = foldr f acc self.list
+    member inline self.foldr(f, acc: 'acc) =
+        let rec foldr f acc list =
+            match list with
+            | x :: xs -> f x (foldr f acc xs)
+            | [] -> acc
+
+        foldr f acc self.list
+
+    member inline self.foldl(f, acc: 'acc) =
+        let f' = fun x g -> fun acc' -> g (f acc' x)
+        self.foldr (f', id) acc
+
+    member inline self.foldMap f =
+        self.foldr ((fun x (acc: ^acc) -> mappend (f x) acc), mempty)
+
+type List'<'a> with
+
+    //Monad
+    member self.bind(f: 'a -> 'b List') : 'b List' = self.foldMap f
+
+    static member inline unit x = List'<_>.``pure`` x
 
 type List'<'a> with
     //Boxing
@@ -63,7 +82,7 @@ type List'<'a> with
 
             $"{acc}; {msg}"
 
-        let result = foldl f "" self.list
+        let result = self.foldl (f, "")
 
         //去除首部分号
         $"[{result.Remove(0, 1)} ]"
