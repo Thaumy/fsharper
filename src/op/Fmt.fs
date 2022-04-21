@@ -1,5 +1,4 @@
-﻿[<AutoOpen>]
-module fsharper.op.IO
+﻿module fsharper.op.Fmt
 
 open System
 

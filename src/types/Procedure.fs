@@ -15,6 +15,7 @@ module ext =
 
 [<AutoOpen>]
 module fn =
+
     let inline flip f a b = f b a
 
     /// aka const
