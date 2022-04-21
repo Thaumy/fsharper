@@ -2,6 +2,10 @@
 
 open System
 
-let print (str: string) = Console.Write str
+let inline print x =
+    (^x: (member ToString : unit -> string) x)
+    |> Console.Write
 
-let println (str: string) = Console.WriteLine str
+let inline println x =
+    (^x: (member ToString : unit -> string) x)
+    |> Console.WriteLine
