@@ -67,10 +67,10 @@ type List'<'a> with
 
 type List'<'a> with
     //Boxing
-    static member inline warp x = List'<_>.``pure`` x
+    static member inline wrap x = List'<_>.``pure`` x
 
-    member self.unwarp() = self.list
-
+    member self.unwrap() = self.list
+    
     member self.debug() =
         let f acc x =
             //下一级调试信息
