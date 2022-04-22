@@ -2,14 +2,14 @@
 module fsharper.op.Boxing
 
 
-let inline warp x = (^m: (static member warp : ^x -> ^m) x)
+let inline wrap x = (^m: (static member wrap : ^x -> ^m) x)
 
-let inline unwarp m = (^m: (member unwarp : unit -> ^v) m)
-//TODO unwarpN并不优雅
-let inline unwarp2 m = m |> unwarp |> unwarp
-let inline unwarp3 m = m |> unwarp |> unwarp |> unwarp
+let inline unwrap m = (^m: (member unwrap : unit -> ^v) m)
+//TODO unwrapN并不优雅
+let inline unwrap2 m = m |> unwrap |> unwrap
+let inline unwrap3 m = m |> unwrap |> unwrap |> unwrap
 
-let inline unwarpOr m value =
-    (^m: (member unwarpOr : ^v -> ^v) m, value)
+let inline unwrapOr m value =
+    (^m: (member unwrapOr : ^v -> ^v) m, value)
 
 let inline flatten m = m >>= id

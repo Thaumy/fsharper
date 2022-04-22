@@ -41,7 +41,7 @@ module fn =
         | _, [] -> []
         | x :: xs, y :: ys -> (x, y) :: zip xs ys
 
-    let rec map f list = (List' list).fmap f |> unwarp
+    let rec map f list = (List' list).fmap f |> unwrap
 
     let rec mapOn<'x, 't> (f: 't -> 'x) (list: 'x list) =
         match list with
@@ -81,7 +81,7 @@ module fn =
 
     let inline flatMap f list =
         let f' x = x |> f |> List'
-        (List' list).foldMap f' |> unwarp
+        (List' list).foldMap f' |> unwrap
 
     let inline leftJoinNoInnerWhen p ls rs =
         filter (fun l -> not <| any (p l) rs) ls

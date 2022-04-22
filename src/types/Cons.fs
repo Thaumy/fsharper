@@ -5,7 +5,7 @@ module Cons =
     open System
     open fsharper.types.Object
 
-    exception TryToUnwarpNil
+    exception TryToUnwrapNil
 
     type Cons<'a> =
         | Nil
@@ -63,11 +63,11 @@ module Cons =
 
     type Cons<'t> with
         //Boxing
-        static member inline warp x = Cons(x, Nil)
+        static member inline wrap x = Cons(x, Nil)
 
-        member self.unwarp() =
+        member self.unwrap() =
             match self with
-            | Nil -> raise TryToUnwarpNil
+            | Nil -> raise TryToUnwrapNil
             | Cons (x, _) -> x
 
 

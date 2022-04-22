@@ -34,18 +34,23 @@ type Result'<'a, 'e> with
 
 type Result'<'a, 'e> with
     //Boxing
-    static member inline warp x = Result'<_, _>.``pure`` x
+    static member inline wrap x = Result'<_, _>.``pure`` x
 
-    member inline self.unwarp() =
+    member inline self.unwrap() =
         match self with
         | Ok x -> x
         | Err e -> e.ToString() |> Exception |> raise
 
-    member inline self.unwarpOr f =
+    member inline self.unwrapOr f =
         match self with
         | Ok x -> x
         | _ -> f ()
 
+    member inline self.whenCanUnwrap f =
+        match self with
+        | Ok x -> f x
+        | _ -> ()
+    
     member inline self.debug() =
         match self with
         | Ok x ->

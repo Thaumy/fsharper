@@ -4,7 +4,7 @@ module fsharper.types.Option'
 open fsharper.types.Object
 
 /// 尝试拆箱None错误
-exception TryToUnwarpNone
+exception TryToUnwrapNone
 
 
 type Option'<'a> =
@@ -36,17 +36,22 @@ type Option'<'a> with
 
 type Option'<'a> with
     //Boxing
-    static member inline warp x = Option'<_>.``pure`` x
+    static member inline wrap x = Option'<_>.``pure`` x
 
-    member inline self.unwarp() =
+    member inline self.unwrap() =
         match self with
         | Some x -> x
-        | None -> raise TryToUnwarpNone
+        | _ -> raise TryToUnwrapNone
 
-    member inline self.unwarpOr f =
+    member inline self.unwrapOr f =
         match self with
         | Some x -> x
-        | None -> f ()
+        | _ -> f ()
+
+    member inline self.whenCanUnwrap f =
+        match self with
+        | Some x -> f x
+        | _ -> ()
 
     member inline self.debug() =
         match self with

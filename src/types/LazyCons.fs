@@ -7,7 +7,7 @@ module LazyCons =
     open fsharper.types.Object
     open fsharper.op.Lazy
 
-    exception TryToUnwarpLazyNil
+    exception TryToUnwrapLazyNil
 
     type LazyCons<'a> =
         | LazyNil
@@ -64,11 +64,11 @@ module LazyCons =
 
     type LazyCons<'t> with
         //Boxing
-        static member inline warp x = LazyCons(x, lazy (LazyNil))
+        static member inline wrap x = LazyCons(x, lazy (LazyNil))
 
-        member self.unwarp() =
+        member self.unwrap() =
             match self with
-            | LazyNil -> raise TryToUnwarpLazyNil
+            | LazyNil -> raise TryToUnwrapLazyNil
             | LazyCons (x, _) -> x
 
 
