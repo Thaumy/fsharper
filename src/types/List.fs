@@ -41,6 +41,13 @@ module fn =
         | _, [] -> []
         | x :: xs, y :: ys -> (x, y) :: zip xs ys
 
+    let rec zipAll a b =
+        match a, b with
+        | [], y :: ys -> (None, Some y) :: zipAll [] ys
+        | x :: xs, [] -> (Some x, None) :: zipAll xs []
+        | x :: xs, y :: ys -> (Some x, Some y) :: zipAll xs ys
+        | [], [] -> []
+
     let rec map f list = (List' list).fmap f |> unwrap
 
     let rec mapOn<'x, 't> (f: 't -> 'x) (list: 'x list) =
