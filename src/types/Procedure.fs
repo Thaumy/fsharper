@@ -24,5 +24,7 @@ module fn =
     let inline (|>) a b = a |> b
 
     //aka function composition (>>)
-    let inline (.|>) a b =
+    let inline (.>) a b =
         Microsoft.FSharp.Core.Operators.op_ComposeRight a b
+
+    let inline (<.) a b = b .> a
