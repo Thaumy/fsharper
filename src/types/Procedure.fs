@@ -16,6 +16,10 @@ module ext =
 [<AutoOpen>]
 module fn =
 
+    let inline loop f =
+        while true do
+            f
+
     let inline flip f a b = f b a
 
     /// aka const
