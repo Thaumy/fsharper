@@ -3,7 +3,7 @@ namespace fsharper.types
 module Cons =
 
     open System
-    open fsharper.types.Object
+    open fsharper.op.Reflection
 
     exception TryToUnwrapNil
 

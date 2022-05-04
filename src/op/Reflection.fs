@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module fsharper.types.Object
+module fsharper.op.Reflection
 
 [<AutoOpen>]
 module ext =
@@ -16,3 +16,13 @@ module ext =
 
         member self.tryInvoke(methodName) =
             self.tryInvoke (methodName, [||]) |> coerce
+
+[<AutoOpen>]
+module fn =
+    /// 是否具有特性
+    let inline hasAttr<'t, 'attr> =
+        typeof<'t>.GetCustomAttributes(
+            typeof<'attr>,
+            false
+        )
+            .Length > 0

@@ -2,8 +2,7 @@
 module fsharper.types.Result'
 
 open System
-open fsharper.types.Object
-
+open fsharper.op.Reflection
 
 type Result'<'a, 'e> =
     | Ok of 'a

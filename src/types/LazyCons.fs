@@ -4,7 +4,7 @@ namespace fsharper.types
 module LazyCons =
 
     open System
-    open fsharper.types.Object
+    open fsharper.op.Reflection
     open fsharper.op.Lazy
 
     exception TryToUnwrapLazyNil

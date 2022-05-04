@@ -1,7 +1,7 @@
 ﻿[<AutoOpen>]
 module fsharper.types.Option'
 
-open fsharper.types.Object
+open fsharper.op.Reflection
 
 /// 尝试拆箱None错误
 exception TryToUnwrapNone
