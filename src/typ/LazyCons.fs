@@ -1,4 +1,4 @@
-namespace fsharper.types
+namespace fsharper.typ
 
 ///惰性求值序对
 module LazyCons =

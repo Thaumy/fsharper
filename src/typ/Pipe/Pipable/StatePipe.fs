@@ -1,4 +1,4 @@
-namespace fsharper.types.Pipe.Pipable
+namespace fsharper.typ.Pipe.Pipable
 
 type StatePipe<'T> private (beforeInvoked: 'T -> 'T) as self =
     [<DefaultValue>]

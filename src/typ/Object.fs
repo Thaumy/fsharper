@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module fsharper.types.Object
+module fsharper.typ.Object
 
 [<AutoOpen>]
 module ext =

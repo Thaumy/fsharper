@@ -1,4 +1,4 @@
-namespace fsharper.types
+namespace fsharper.typ
 
 module Cons =
 

@@ -1,4 +1,4 @@
-module fsharper.types.Dual
+module fsharper.typ.Dual
 
 type Dual<'a> = Dual of getDual: 'a
 

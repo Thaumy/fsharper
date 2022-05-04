@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module fsharper.types.Tuple
+module fsharper.typ.Tuple
 
 [<AutoOpen>]
 module fn =

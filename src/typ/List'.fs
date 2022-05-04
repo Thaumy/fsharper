@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module fsharper.types.List'
+module fsharper.typ.List'
 
 open fsharper.op
 open fsharper.op.Reflection

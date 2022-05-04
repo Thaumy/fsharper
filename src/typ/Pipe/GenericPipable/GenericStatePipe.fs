@@ -1,4 +1,4 @@
-namespace fsharper.types.Pipe.GenericPipable
+namespace fsharper.typ.Pipe.GenericPipable
 
 open fsharper.op.Coerce
 

@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module fsharper.types.List
+module fsharper.typ.List
 
 [<AutoOpen>]
 module ext =
@@ -13,8 +13,8 @@ module fn =
     open fsharper.op
     open fsharper.op.Boxing
     open fsharper.op.Coerce
-    open fsharper.types.Ord
-    open fsharper.types.Procedure
+    open fsharper.typ.Ord
+    open fsharper.typ.Procedure
     open fsharper.op.Semigroup
     open fsharper.op.Monoid
 

@@ -1,5 +1,5 @@
 ﻿[<AutoOpen>]
-module fsharper.types.Procedure
+module fsharper.typ.Procedure
 
 [<AutoOpen>]
 module ext =

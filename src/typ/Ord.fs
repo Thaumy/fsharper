@@ -1,4 +1,4 @@
-﻿module fsharper.types.Ord
+﻿module fsharper.typ.Ord
 
 
 type Ordering =

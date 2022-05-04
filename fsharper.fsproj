@@ -21,25 +21,25 @@
         <Compile Include="src\op\Async.fs" />
         <Compile Include="src\op\Reflection.fs" />
 
-        <Compile Include="src\types\Array.fs" />
-        <Compile Include="src\types\Procedure.fs" />
-        <Compile Include="src\types\Tuple.fs" />
-        <Compile Include="src\types\Ord.fs" />
-        <Compile Include="src\types\Object.fs" />
-        <Compile Include="src\types\Option'.fs" />
-        <Compile Include="src\types\Result'.fs" />
-        <Compile Include="src\types\List'.fs" />
-        <Compile Include="src\types\List.fs" />
-        <Compile Include="src\types\Cons.fs" />
-        <Compile Include="src\types\LazyCons.fs" />
-        <Compile Include="src\types\Dual.fs" />
-        <Compile Include="src\types\Endo.fs" />
-        <Compile Include="src\types\Pipe\GenericPipable\GenericPipable.fs" />
-        <Compile Include="src\types\Pipe\GenericPipable\GenericPipe.fs" />
-        <Compile Include="src\types\Pipe\GenericPipable\GenericStatePipe.fs" />
-        <Compile Include="src\types\Pipe\Pipable\Pipable.fs" />
-        <Compile Include="src\types\Pipe\Pipable\Pipe.fs" />
-        <Compile Include="src\types\Pipe\Pipable\StatePipe.fs" />
+        <Compile Include="src\typ\Array.fs" />
+        <Compile Include="src\typ\Procedure.fs" />
+        <Compile Include="src\typ\Tuple.fs" />
+        <Compile Include="src\typ\Ord.fs" />
+        <Compile Include="src\typ\Object.fs" />
+        <Compile Include="src\typ\Option'.fs" />
+        <Compile Include="src\typ\Result'.fs" />
+        <Compile Include="src\typ\List'.fs" />
+        <Compile Include="src\typ\List.fs" />
+        <Compile Include="src\typ\Cons.fs" />
+        <Compile Include="src\typ\LazyCons.fs" />
+        <Compile Include="src\typ\Dual.fs" />
+        <Compile Include="src\typ\Endo.fs" />
+        <Compile Include="src\typ\Pipe\GenericPipable\GenericPipable.fs" />
+        <Compile Include="src\typ\Pipe\GenericPipable\GenericPipe.fs" />
+        <Compile Include="src\typ\Pipe\GenericPipable\GenericStatePipe.fs" />
+        <Compile Include="src\typ\Pipe\Pipable\Pipable.fs" />
+        <Compile Include="src\typ\Pipe\Pipable\Pipe.fs" />
+        <Compile Include="src\typ\Pipe\Pipable\StatePipe.fs" />
     </ItemGroup>
 
 </Project>

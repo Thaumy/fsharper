@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module fsharper.types.Array
+module fsharper.typ.Array
 
 open System
 

@@ -1,4 +1,4 @@
-namespace fsharper.types.Pipe.Pipable
+namespace fsharper.typ.Pipe.Pipable
 
 type Pipe<'T> internal (beforeInvoked: 'T -> 'T) =
     interface Pipable<'T> with
