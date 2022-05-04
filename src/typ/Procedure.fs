@@ -18,7 +18,7 @@ module fn =
 
     let inline loop f =
         while true do
-            f
+            f ()
 
     let inline flip f a b = f b a
 
