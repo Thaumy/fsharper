@@ -45,6 +45,8 @@ type Result'<'a, 'e> with
         | Ok x -> x
         | _ -> f ()
 
+    member inline self.unwrapOrPanic e = self.unwrapOr (fun () -> raise e)
+    
     member inline self.whenCanUnwrap f =
         match self with
         | Ok x -> f x
