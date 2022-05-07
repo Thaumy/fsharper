@@ -1,5 +1,7 @@
 ﻿module fsharper.typ.Ord
 
+open System
+
 
 type Ordering =
     | GT

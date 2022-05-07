@@ -1,5 +1,7 @@
 module fsharper.typ.Dual
 
+//TODO exp feature
+
 type Dual<'a> = Dual of getDual: 'a
 
 let inline mappend ma mb =

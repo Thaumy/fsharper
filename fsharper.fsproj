@@ -21,6 +21,7 @@
         <Compile Include="src\op\Fmt.fs" />
         <Compile Include="src\op\Async.fs" />
         <Compile Include="src\op\Reflection.fs" />
+        <Compile Include="src\op\Eq.fs" />
 
         <Compile Include="src\typ\Array.fs" />
         <Compile Include="src\typ\Procedure.fs" />

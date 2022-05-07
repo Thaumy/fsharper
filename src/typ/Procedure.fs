@@ -23,9 +23,7 @@ module fn =
     let inline flip f a b = f b a
 
     /// aka const
-    let inline konst x _ = x
-
-    let inline (|>) a b = a |> b
+    let inline always x _ = x
 
     //aka function composition (>>)
     let inline (.>) a b =

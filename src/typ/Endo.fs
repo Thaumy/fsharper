@@ -1,5 +1,7 @@
 module fsharper.typ.Endo
 
+//TODO exp feature
+
 open fsharper.op.Reflection
 open fsharper.typ
 
