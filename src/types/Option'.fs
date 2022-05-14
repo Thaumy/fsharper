@@ -1,7 +1,7 @@
 ﻿[<AutoOpen>]
-module fsharper.typ.Option'
+module fsharper.types.Option'
 
-open fsharper.op.Reflection
+open fsharper.types.Object
 
 /// 尝试拆箱None错误
 exception TryToUnwrapNone
@@ -48,17 +48,10 @@ type Option'<'a> with
         | Some x -> x
         | _ -> f ()
 
-    member inline self.unwrapOrPanic e = self.unwrapOr (fun () -> raise e)
-
     member inline self.whenCanUnwrap f =
         match self with
         | Some x -> f x
         | _ -> ()
-
-    member inline self.fromNullable x =
-        match x with
-        | null -> None
-        | _ -> Some x
 
     member inline self.debug() =
         match self with

@@ -1,9 +1,7 @@
-module fsharper.typ.Endo
+module fsharper.types.Endo
 
-//TODO exp feature
-
-open fsharper.op.Reflection
-open fsharper.typ
+open fsharper.types.Object
+open fsharper.types
 
 type Endo<'a> = Endo of appEndo: ('a -> 'a)
 

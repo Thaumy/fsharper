@@ -1,6 +1,4 @@
-module fsharper.typ.Dual
-
-//TODO exp feature
+module fsharper.types.Dual
 
 type Dual<'a> = Dual of getDual: 'a
 
