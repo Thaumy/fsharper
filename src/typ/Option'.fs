@@ -55,6 +55,11 @@ type Option'<'a> with
         | Some x -> f x
         | _ -> ()
 
+    member inline self.fromNullable x =
+        match x with
+        | null -> None
+        | _ -> Some x
+
     member inline self.debug() =
         match self with
         | Some x ->
