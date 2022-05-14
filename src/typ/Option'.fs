@@ -55,7 +55,7 @@ type Option'<'a> with
         | Some x -> f x
         | _ -> ()
 
-    member inline self.fromNullable x =
+    static member inline fromNullable x =
         match x with
         | null -> None
         | _ -> Some x
