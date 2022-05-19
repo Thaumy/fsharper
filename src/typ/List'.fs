@@ -70,7 +70,7 @@ type List'<'a> with
     static member inline wrap x = List'<_>.``pure`` x
 
     member self.unwrap() = self.list
-    
+
     member self.debug() =
         let f acc x =
             //下一级调试信息
@@ -86,3 +86,5 @@ type List'<'a> with
 
         //去除首部分号
         $"[{result.Remove(0, 1)} ]"
+
+type List' = List<obj>

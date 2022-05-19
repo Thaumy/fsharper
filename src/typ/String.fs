@@ -2,7 +2,6 @@
 module fsharper.typ.String
 
 open System
-open fsharper.op.Alias
 
 [<AutoOpen>]
 module ext =
