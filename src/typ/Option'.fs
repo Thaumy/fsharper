@@ -60,6 +60,16 @@ type Option'<'a> with
         | null -> None
         | _ -> Some x
 
+    static member inline fromCommaOk x =
+        match x with
+        | v, true -> Some v
+        | _ -> None
+
+    static member inline fromOkComma x =
+        match x with
+        | true, v -> Some v
+        | _ -> None
+
     member inline self.debug() =
         match self with
         | Some x ->
@@ -72,3 +82,5 @@ type Option'<'a> with
 
             $"Some {msg}"
         | None -> "None"
+
+type Option' = Option'<obj>

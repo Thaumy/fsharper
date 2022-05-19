@@ -3,6 +3,7 @@ module fsharper.typ.Result'
 
 open System
 open fsharper.op.Reflection
+open fsharper.typ
 
 type Result'<'a, 'e> =
     | Ok of 'a
@@ -46,12 +47,12 @@ type Result'<'a, 'e> with
         | _ -> f ()
 
     member inline self.unwrapOrPanic e = self.unwrapOr (fun () -> raise e)
-    
+
     member inline self.whenCanUnwrap f =
         match self with
         | Ok x -> f x
         | _ -> ()
-    
+
     member inline self.debug() =
         match self with
         | Ok x ->
@@ -72,3 +73,5 @@ type Result'<'a, 'e> with
                 | _ -> e.ToString()
 
             $"Err {msg}"
+
+type Result' = Result'<obj, exn>
