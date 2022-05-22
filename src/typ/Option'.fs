@@ -55,6 +55,11 @@ type Option'<'a> with
         | Some x -> f x
         | _ -> ()
 
+    member inline self.whenCanUnwrapOr(trueDo, falseDo) =
+        match self with
+        | Some x -> trueDo x
+        | _ -> falseDo ()
+
     static member inline fromNullable x =
         match x with
         | null -> None

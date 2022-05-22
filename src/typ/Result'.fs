@@ -53,6 +53,11 @@ type Result'<'a, 'e> with
         | Ok x -> f x
         | _ -> ()
 
+    member inline self.whenCanUnwrapOr(trueDo, falseDo) =
+        match self with
+        | Ok x -> trueDo x
+        | Err e -> falseDo e
+
     member inline self.debug() =
         match self with
         | Ok x ->
