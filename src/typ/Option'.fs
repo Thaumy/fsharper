@@ -50,12 +50,12 @@ type Option'<'a> with
 
     member inline self.unwrapOrPanic e = self.unwrapOr (fun () -> raise e)
 
-    member inline self.whenCanUnwrap f =
+    member inline self.ifCanUnwrap f =
         match self with
         | Some x -> f x
         | _ -> ()
 
-    member inline self.whenCanUnwrapOr(trueDo, falseDo) =
+    member inline self.ifCanUnwrapOr(trueDo, falseDo) =
         match self with
         | Some x -> trueDo x
         | _ -> falseDo ()
