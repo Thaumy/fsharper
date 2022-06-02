@@ -26,8 +26,9 @@
 
         <Compile Include="src\typ\Array.fs" />
 
-        <Compile Include="src\typ\String.fs" />
+        <Compile Include="src\typ\Task.fs" />
         <Compile Include="src\typ\Procedure.fs" />
+        <Compile Include="src\typ\String.fs" />
         <Compile Include="src\typ\Tuple.fs" />
         <Compile Include="src\typ\Ord.fs" />
         <Compile Include="src\typ\Object.fs" />
