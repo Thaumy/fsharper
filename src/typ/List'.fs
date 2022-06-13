@@ -1,6 +1,7 @@
 [<AutoOpen>]
 module fsharper.typ.List'
 
+open System.Collections
 open fsharper.op
 open fsharper.op.Reflection
 
@@ -9,6 +10,7 @@ open fsharper.op.Reflection
 
 type List'<'a>(init: 'a list) =
     new() = List' []
+
     member self.list: 'a list = init
 
 type List'<'a> with

@@ -13,6 +13,7 @@
         <Compile Include="src\op\Lazy.fs" />
         <Compile Include="src\op\Boxing.fs" />
         <Compile Include="src\op\Debug.fs" />
+        <Compile Include="src\op\Assert.fs" />
         <Compile Include="src\op\Functor.fs" />
         <Compile Include="src\op\Applicative.fs" />
         <Compile Include="src\op\Monad.fs" />
