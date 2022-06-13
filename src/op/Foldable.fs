@@ -1,5 +1,7 @@
 module fsharper.op.Foldable
 
+open System.Collections.Generic
+
 let inline foldMap f t =
     (^t: (member foldMap : (^a -> ^m) -> ^m) t, f)
 
