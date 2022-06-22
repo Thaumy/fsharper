@@ -8,10 +8,9 @@ module ext =
 
     type Task with
 
-        static member RunIgnore f =
-            fun _ -> task { f () |> ignore }
-            |> Task.Run<unit>
-            |> ignore
+
+        static member RunAsTask(f: unit -> 'a) = f |> Task.Run :> Task
+        static member RunIgnore f = f |> Task.RunAsTask |> ignore
 
         member self.Then f = self.ContinueWith(fun t -> t |> f)
         member self.Then f = self.ContinueWith(fun _ -> f ())

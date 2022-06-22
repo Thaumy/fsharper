@@ -30,3 +30,4 @@ module fn =
         Microsoft.FSharp.Core.Operators.op_ComposeRight a b
 
     let inline (<.) a b = fun x -> a x b
+    
