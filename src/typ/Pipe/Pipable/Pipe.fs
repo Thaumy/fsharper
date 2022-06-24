@@ -8,6 +8,7 @@ type Pipe<'T> internal (beforeInvoked: 'T -> 'T) =
 
     member self.build() = self :> Pipable<'T>
 
+    /// 在管道入口前加入管道
     member self.import(pipable: Pipable<'T>) =
         Pipe<'T>(pipable.invoke, func = self.func)
 
@@ -15,6 +16,7 @@ type Pipe<'T> internal (beforeInvoked: 'T -> 'T) =
 
 type Pipe<'T> with
     //Semigroup
+    /// 在管道出口加入管道
     member self.mappend(mb: Pipe<'T>) = self |> mb.import
 
     //Monoid
