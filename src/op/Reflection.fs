@@ -26,3 +26,6 @@ module fn =
             false
         )
             .Length > 0
+
+    /// 获取类型的全名
+    let inline fullNameOf<'t> = typeof<'t>.FullName.Replace ('+', '.')
