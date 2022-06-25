@@ -1,13 +1,12 @@
 namespace fsharper.typ.Pipe.GenericPipable
 
 open fsharper.op.Coerce
+open fsharper.typ.Procedure
 
 type GenericStatePipe<'I, 'O>(activate: 'I -> 'O, activated: 'I -> 'O) as self =
+
     [<DefaultValue>]
     val mutable func: 'I -> 'O
-
-    interface GenericPipable<'I, 'O> with
-        member self.invoke(arg: 'I) : 'O = arg |> self.func
 
     do
         self.func <-
@@ -19,14 +18,22 @@ type GenericStatePipe<'I, 'O>(activate: 'I -> 'O, activated: 'I -> 'O) as self =
     member val activate = activate with get, set
     member val activated = activated with get, set
 
-    member self.build() = self :> GenericPipable<'I, 'O>
+    member self.invoke input = self.func input
 
-    member self.import(pipable: GenericPipable<'T, 'I>) =
-        GenericStatePipe<'T, 'O>(pipable.invoke >> activate, pipable.invoke >> activated)
+    member self.import(gp: GenericPipable<'t, 'I>) =
+        GenericStatePipe<'t, 'O>(gp.invoke .> activate, gp.invoke .> activated)
+
+    member self.export(gp: GenericPipable<'O, 't>) = gp.import self
+
+    interface GenericPipable<'I, 'O> with
+        member i.invoke input = self.invoke input
+        member i.import gp = self.import gp
+        member i.export gp = self.export gp
 
 type GenericStatePipe<'I, 'O> with
+
     //Semigroup
-    member self.mappend<'a>(mb: GenericStatePipe<'O, 'a>) = self |> mb.import
+    member ma.mappend(mb: GenericStatePipe<'O, 't>) = ma.export mb
 
     //Monoid
     static member mempty() =

@@ -1,23 +1,30 @@
 namespace fsharper.typ.Pipe.Pipable
 
-type Pipe<'T> internal (beforeInvoked: 'T -> 'T) =
-    interface Pipable<'T> with
-        member self.invoke(arg: 'T) = arg |> beforeInvoked |> self.func
+open fsharper.typ.Pipe.GenericPipable
 
-    new() = Pipe(id)
-
-    member self.build() = self :> Pipable<'T>
-
-    /// 在管道入口前加入管道
-    member self.import(pipable: Pipable<'T>) =
-        Pipe<'T>(pipable.invoke, func = self.func)
+type Pipe<'T> internal (beforeInvoked: 'T -> 'T) as self =
 
     member val func: 'T -> 'T = id with get, set
 
+    new() = Pipe(id)
+
+    member self.invoke input = input |> beforeInvoked |> self.func
+
+    member self.import(p: Pipable<'T>) = Pipe<'T>(p.invoke, func = self.func)
+
+    member self.export(p: Pipable<'T>) = p.import self
+
+    interface Pipable<'T> with
+        member i.invoke input = self.invoke input
+
+        member i.import p = p.export self
+
+        member i.export p = p.import i
+
 type Pipe<'T> with
+
     //Semigroup
-    /// 在管道出口加入管道
-    member self.mappend(mb: Pipe<'T>) = self |> mb.import
+    member ma.mappend(mb: Pipe<'T>) = ma.export mb
 
     //Monoid
     static member mempty() = Pipe<'T>()

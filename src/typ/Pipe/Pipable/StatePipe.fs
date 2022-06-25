@@ -1,11 +1,12 @@
 namespace fsharper.typ.Pipe.Pipable
 
 type StatePipe<'T> private (beforeInvoked: 'T -> 'T) as self =
+
     [<DefaultValue>]
     val mutable func: 'T -> 'T
 
-    interface Pipable<'T> with
-        member self.invoke(arg: 'T) = arg |> beforeInvoked |> self.func
+    member val activate: 'T -> 'T = id with get, set
+    member val activated: 'T -> 'T = id with get, set
 
     do
         self.func <-
@@ -16,17 +17,22 @@ type StatePipe<'T> private (beforeInvoked: 'T -> 'T) as self =
 
     new() = StatePipe(id)
 
-    member self.build() = self :> Pipable<'T>
+    member self.invoke input = input |> beforeInvoked |> self.func
 
-    member self.import(pipable: Pipable<'T>) =
-        StatePipe<'T>(pipable.invoke, activate = self.activate, activated = self.activated)
+    member self.import(p: Pipable<'T>) =
+        StatePipe<'T>(p.invoke, activate = self.activate, activated = self.activated)
 
-    member val activate: 'T -> 'T = id with get, set
-    member val activated: 'T -> 'T = id with get, set
+    member self.export(p: Pipable<'T>) = p.import self
+
+    interface Pipable<'T> with
+        member i.invoke input = self.invoke input
+        member i.import p = p.export i
+        member i.export p = p.import i
 
 type StatePipe<'T> with
+
     //Semigroup
-    member self.mappend(mb: StatePipe<'T>) = self |> mb.import
+    member ma.mappend(mb: StatePipe<'T>) = ma.export mb
 
     //Monoid
     static member mempty() = StatePipe<'T>()
