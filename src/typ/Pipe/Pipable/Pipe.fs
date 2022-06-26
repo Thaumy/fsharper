@@ -3,17 +3,15 @@ namespace fsharper.typ.Pipe.Pipable
 open fsharper.typ.Pipe.GenericPipable
 open fsharper.typ.Procedure
 
-type Pipe<'T> internal (beforeInvoked: 'T -> 'T) as self =
+type Pipe<'T>(func) as self =
 
-    member val func: 'T -> 'T = id with get, set
+    new() = Pipe<'T>(id)
 
-    new() = Pipe(id)
+    member self.fill = func
 
-    member self.fill = beforeInvoked .> self.func
+    member self.import(p: Pipable<'T>) = Pipe<'T>(p.fill .> self.fill)
 
-    member self.import(p: Pipable<'T>) = Pipe<'T>(p.fill, func = self.func)
-
-    member self.export(p: Pipable<'T>) = p.import self
+    member self.export(p: Pipable<'T>) : Pipe<'T> = downcast p.import self
 
     interface Pipable<'T> with
         member i.fill input = self.fill input

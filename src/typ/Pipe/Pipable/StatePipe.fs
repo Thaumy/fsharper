@@ -2,29 +2,26 @@ namespace fsharper.typ.Pipe.Pipable
 
 open fsharper.typ.Procedure
 
-type StatePipe<'T> private (beforeInvoked: 'T -> 'T) as self =
+type StatePipe<'T>() as self =
+
+    member val activate = id with get, set
+    member val activated = id with get, set
 
     [<DefaultValue>]
-    val mutable func: 'T -> 'T
-
-    member val activate: 'T -> 'T = id with get, set
-    member val activated: 'T -> 'T = id with get, set
+    val mutable private func: 'T -> 'T
 
     do
         self.func <-
             fun arg ->
                 self.func <- self.activated
+                self.activate arg
 
-                arg |> self.activate
-
-    new() = StatePipe(id)
-
-    member self.fill = beforeInvoked .> self.func
+    member self.fill = self.func
 
     member self.import(p: Pipable<'T>) =
-        StatePipe<'T>(p.fill, activate = self.activate, activated = self.activated)
+        StatePipe<'T>(activate = (p.fill .> self.activate), activated = (p.fill .> self.activated))
 
-    member self.export(p: Pipable<'T>) = p.import self
+    member self.export(p: Pipable<'T>) : StatePipe<'T> = downcast p.import self
 
     interface Pipable<'T> with
         member i.fill input = self.fill input
