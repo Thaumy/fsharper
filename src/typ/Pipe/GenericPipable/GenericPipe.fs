@@ -7,14 +7,14 @@ type GenericPipe<'I, 'O>(func: 'I -> 'O) as self =
 
     member val func = func with get, set
 
-    member self.invoke = self.func
+    member self.fill = self.func
 
-    member self.import(gp: GenericPipable<'t, 'I>) = GenericPipe<'t, 'O>(gp.invoke .> func)
+    member self.import(gp: GenericPipable<'t, 'I>) = GenericPipe<'t, 'O>(gp.fill .> func)
 
     member self.export(gp: GenericPipable<'O, 't>) = gp.import self
 
     interface GenericPipable<'I, 'O> with
-        member i.invoke input = self.invoke input
+        member i.fill input = self.fill input
         member i.import gp = self.import gp
         member i.export gp = self.export gp
 

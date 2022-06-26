@@ -2,8 +2,8 @@ namespace fsharper.typ.Pipe.GenericPipable
 
 type GenericPipable<'I, 'O> =
     
-    /// 执行管道
-    abstract invoke : 'I -> 'O
+    /// 填充管道
+    abstract fill : 'I -> 'O
 
     /// 在管道入口前对接管道
     /// 返回一个新的管道

@@ -1,5 +1,7 @@
 namespace fsharper.typ.Pipe.Pipable
 
+open fsharper.typ.Procedure
+
 type StatePipe<'T> private (beforeInvoked: 'T -> 'T) as self =
 
     [<DefaultValue>]
@@ -17,15 +19,15 @@ type StatePipe<'T> private (beforeInvoked: 'T -> 'T) as self =
 
     new() = StatePipe(id)
 
-    member self.invoke input = input |> beforeInvoked |> self.func
+    member self.fill = beforeInvoked .> self.func
 
     member self.import(p: Pipable<'T>) =
-        StatePipe<'T>(p.invoke, activate = self.activate, activated = self.activated)
+        StatePipe<'T>(p.fill, activate = self.activate, activated = self.activated)
 
     member self.export(p: Pipable<'T>) = p.import self
 
     interface Pipable<'T> with
-        member i.invoke input = self.invoke input
+        member i.fill input = self.fill input
         member i.import p = p.export i
         member i.export p = p.import i
 
