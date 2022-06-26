@@ -44,9 +44,11 @@
         <Compile Include="src\typ\Pipe\GenericPipable\GenericPipable.fs" />
         <Compile Include="src\typ\Pipe\GenericPipable\GenericPipe.fs" />
         <Compile Include="src\typ\Pipe\GenericPipable\GenericStatePipe.fs" />
+        <Compile Include="src\typ\Pipe\GenericPipable\GenericCachePipe.fs" />
         <Compile Include="src\typ\Pipe\Pipable\Pipable.fs" />
         <Compile Include="src\typ\Pipe\Pipable\Pipe.fs" />
         <Compile Include="src\typ\Pipe\Pipable\StatePipe.fs" />
+        <Compile Include="src\typ\Pipe\Pipable\CachePipe.fs" />
     </ItemGroup>
 
 </Project>

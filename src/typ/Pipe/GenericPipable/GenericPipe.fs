@@ -1,20 +1,21 @@
 namespace fsharper.typ.Pipe.GenericPipable
 
 open fsharper.op.Coerce
+open fsharper.typ.Pipe.GenericPipable
 open fsharper.typ.Procedure
 
 type GenericPipe<'I, 'O>(func: 'I -> 'O) as self =
 
-    member val func = func with get, set
+    new() = GenericPipe<'I, 'O>(coerce)
 
-    member self.invoke = self.func
+    member self.fill = func
 
-    member self.import(gp: GenericPipable<'t, 'I>) = GenericPipe<'t, 'O>(gp.invoke .> func)
+    member self.import(gp: GenericPipable<'t, 'I>) = GenericPipe<'t, 'O>(gp.fill .> func)
 
-    member self.export(gp: GenericPipable<'O, 't>) = gp.import self
+    member self.export(gp: GenericPipable<'O, 't>) : GenericPipe<'I, 't> = downcast gp.import self
 
     interface GenericPipable<'I, 'O> with
-        member i.invoke input = self.invoke input
+        member i.fill input = self.fill input
         member i.import gp = self.import gp
         member i.export gp = self.export gp
 
@@ -24,4 +25,4 @@ type GenericPipe<'I, 'O> with
     member ma.mappend(mb: GenericPipe<'O, 't>) = ma.export mb
 
     //Monoid
-    static member mempty() = GenericPipe<'I, 'O>(coerce)
+    static member mempty() = GenericPipe<'I, 'O>()
