@@ -1,6 +1,6 @@
-namespace fsharper.typ.Pipe.Pipable
+namespace fsharper.typ.Pipe.IPipe
 
-open fsharper.typ.Pipe.GenericPipable
+open fsharper.typ.Pipe.IGenericPipe
 open fsharper.typ.Procedure
 
 type Pipe<'T>(func) as self =
@@ -9,11 +9,11 @@ type Pipe<'T>(func) as self =
 
     member self.fill = func
 
-    member self.import(p: Pipable<'T>) = Pipe<'T>(p.fill .> self.fill)
+    member self.import(p: IPipe<'T>) = Pipe<'T>(p.fill .> self.fill)
 
-    member self.export(p: Pipable<'T>) : Pipe<'T> = downcast p.import self
+    member self.export(p: IPipe<'T>) : Pipe<'T> = downcast p.import self
 
-    interface Pipable<'T> with
+    interface IPipe<'T> with
         member i.fill input = self.fill input
         member i.import p = p.export self
         member i.export p = p.import i

@@ -1,7 +1,7 @@
-namespace fsharper.typ.Pipe.GenericPipable
+namespace fsharper.typ.Pipe.IGenericPipe
 
 open fsharper.op.Coerce
-open fsharper.typ.Pipe.GenericPipable
+open fsharper.typ.Pipe.IGenericPipe
 open fsharper.typ.Procedure
 
 type GenericStatePipe<'I, 'O>() as self =
@@ -20,12 +20,12 @@ type GenericStatePipe<'I, 'O>() as self =
 
     member self.fill = self.func
 
-    member self.import(gp: GenericPipable<'t, 'I>) =
+    member self.import(gp: IGenericPipe<'t, 'I>) =
         GenericStatePipe<'t, 'O>(activate = (gp.fill .> self.activate), activated = (gp.fill .> self.activated))
 
-    member self.export(gp: GenericPipable<'O, 't>) : GenericStatePipe<'I, 't> = downcast gp.import self
+    member self.export(gp: IGenericPipe<'O, 't>) : GenericStatePipe<'I, 't> = downcast gp.import self
 
-    interface GenericPipable<'I, 'O> with
+    interface IGenericPipe<'I, 'O> with
         member i.fill input = self.fill input
         member i.import gp = self.import gp
         member i.export gp = self.export gp

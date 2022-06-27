@@ -1,7 +1,7 @@
-namespace fsharper.typ.Pipe.Pipable
+namespace fsharper.typ.Pipe.IPipe
 
 open fsharper.typ
-open fsharper.typ.Pipe.Pipable
+open fsharper.typ.Pipe.IPipe
 
 type CachePipe<'T>(func: 'T -> Option'<'T>) as self =
 
@@ -14,11 +14,11 @@ type CachePipe<'T>(func: 'T -> Option'<'T>) as self =
         | Some output -> output
         | _ -> self.dataPipe.fill input
 
-    member self.import(p: Pipable<'T>) = CachePipe<'T>(p.fill .> func)
+    member self.import(p: IPipe<'T>) = CachePipe<'T>(p.fill .> func)
 
-    member self.export(p: Pipable<'T>) : CachePipe<'T> = downcast p.import self
+    member self.export(p: IPipe<'T>) : CachePipe<'T> = downcast p.import self
 
-    interface Pipable<'T> with
+    interface IPipe<'T> with
         member i.fill input = self.fill input
         member i.import p = p.export self
         member i.export p = p.import self

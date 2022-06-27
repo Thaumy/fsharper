@@ -41,14 +41,14 @@
         <Compile Include="src\typ\LazyCons.fs" />
         <Compile Include="src\typ\Dual.fs" />
         <Compile Include="src\typ\Endo.fs" />
-        <Compile Include="src\typ\Pipe\GenericPipable\GenericPipable.fs" />
-        <Compile Include="src\typ\Pipe\GenericPipable\GenericPipe.fs" />
-        <Compile Include="src\typ\Pipe\GenericPipable\GenericStatePipe.fs" />
-        <Compile Include="src\typ\Pipe\GenericPipable\GenericCachePipe.fs" />
-        <Compile Include="src\typ\Pipe\Pipable\Pipable.fs" />
-        <Compile Include="src\typ\Pipe\Pipable\Pipe.fs" />
-        <Compile Include="src\typ\Pipe\Pipable\StatePipe.fs" />
-        <Compile Include="src\typ\Pipe\Pipable\CachePipe.fs" />
+        <Compile Include="src\typ\Pipe\IGenericPipe\IGenericPipe.fs" />
+        <Compile Include="src\typ\Pipe\IGenericPipe\GenericPipe.fs" />
+        <Compile Include="src\typ\Pipe\IGenericPipe\GenericStatePipe.fs" />
+        <Compile Include="src\typ\Pipe\IGenericPipe\GenericCachePipe.fs" />
+        <Compile Include="src\typ\Pipe\IPipe\IPipe.fs" />
+        <Compile Include="src\typ\Pipe\IPipe\Pipe.fs" />
+        <Compile Include="src\typ\Pipe\IPipe\StatePipe.fs" />
+        <Compile Include="src\typ\Pipe\IPipe\CachePipe.fs" />
     </ItemGroup>
 
 </Project>
