@@ -26,7 +26,6 @@
         <Compile Include="src\op\Eq.fs" />
 
         <Compile Include="src\typ\Array.fs" />
-
         <Compile Include="src\typ\Task.fs" />
         <Compile Include="src\typ\Procedure.fs" />
         <Compile Include="src\typ\String.fs" />
@@ -41,14 +40,13 @@
         <Compile Include="src\typ\LazyCons.fs" />
         <Compile Include="src\typ\Dual.fs" />
         <Compile Include="src\typ\Endo.fs" />
-        <Compile Include="src\typ\Pipe\IGenericPipe\IGenericPipe.fs" />
-        <Compile Include="src\typ\Pipe\IGenericPipe\GenericPipe.fs" />
-        <Compile Include="src\typ\Pipe\IGenericPipe\GenericStatePipe.fs" />
-        <Compile Include="src\typ\Pipe\IGenericPipe\GenericCachePipe.fs" />
-        <Compile Include="src\typ\Pipe\IPipe\IPipe.fs" />
-        <Compile Include="src\typ\Pipe\IPipe\Pipe.fs" />
-        <Compile Include="src\typ\Pipe\IPipe\StatePipe.fs" />
-        <Compile Include="src\typ\Pipe\IPipe\CachePipe.fs" />
+        <Compile Include="src\typ\Pipe\IGenericPipe.fs" />
+        <Compile Include="src\typ\Pipe\MutGenericPipe.fs" />
+        <Compile Include="src\typ\Pipe\MutGenericStatePipe.fs" />
+        <Compile Include="src\typ\Pipe\MutGenericCachePipe.fs" />
+        <Compile Include="src\typ\Pipe\GenericPipe.fs" />
+        <Compile Include="src\typ\Pipe\GenericStatePipe.fs" />
+        <Compile Include="src\typ\Pipe\GenericCachePipe.fs" />
     </ItemGroup>
 
 </Project>
