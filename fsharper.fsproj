@@ -8,48 +8,45 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="src\alias\int.fs" />
-        <Compile Include="src\alias\uint.fs" />
-        <Compile Include="src\alias\float.fs" />
-        <Compile Include="src\alias\Dictionary.fs" />
-        <Compile Include="src\op\Eq.fs" />
-        <Compile Include="src\op\Fmt.fs" />
+        <Compile Include="src\op\Alias.fs" />
+        <Compile Include="src\op\Coerce.fs" />
         <Compile Include="src\op\Lazy.fs" />
-        <Compile Include="src\op\Async.fs" />
+        <Compile Include="src\op\Boxing.fs" />
         <Compile Include="src\op\Debug.fs" />
         <Compile Include="src\op\Assert.fs" />
-        <Compile Include="src\op\Boxing.fs" />
-        <Compile Include="src\op\Monad.fs" />
-        <Compile Include="src\op\Coerce.fs" />
-        <Compile Include="src\op\Reflect.fs" />
-        <Compile Include="src\op\Pattern.fs" />
-        <Compile Include="src\op\Monoid.fs" />
-        <Compile Include="src\op\Iterable.fs" />
         <Compile Include="src\op\Functor.fs" />
-        <Compile Include="src\op\Runtime.fs" />
-        <Compile Include="src\op\Semigroup.fs" />
-        <Compile Include="src\op\Foldable.fs" />
         <Compile Include="src\op\Applicative.fs" />
+        <Compile Include="src\op\Monad.fs" />
+        <Compile Include="src\op\Semigroup.fs" />
+        <Compile Include="src\op\Monoid.fs" />
+        <Compile Include="src\op\Foldable.fs" />
+        <Compile Include="src\op\Fmt.fs" />
+        <Compile Include="src\op\Async.fs" />
+        <Compile Include="src\op\Reflection.fs" />
+        <Compile Include="src\op\Eq.fs" />
+
+        <Compile Include="src\typ\Array.fs" />
+        <Compile Include="src\typ\Task.fs" />
+        <Compile Include="src\typ\Procedure.fs" />
+        <Compile Include="src\typ\String.fs" />
+        <Compile Include="src\typ\Tuple.fs" />
+        <Compile Include="src\typ\Ord.fs" />
+        <Compile Include="src\typ\Object.fs" />
         <Compile Include="src\typ\Option'.fs" />
         <Compile Include="src\typ\Result'.fs" />
-        <Compile Include="src\typ\Seq.fs" />
-        <Compile Include="src\typ\Ord.fs" />
-        <Compile Include="src\typ\Proc.fs" />
         <Compile Include="src\typ\List'.fs" />
         <Compile Include="src\typ\List.fs" />
-        <Compile Include="src\typ\Task.fs" />
-        <Compile Include="src\typ\Dual.fs" />
         <Compile Include="src\typ\Cons.fs" />
-        <Compile Include="src\typ\Endo.fs" />
-        <Compile Include="src\typ\Tuple.fs" />
-        <Compile Include="src\typ\Array.fs" />
-        <Compile Include="src\typ\String.fs" />
-        <Compile Include="src\typ\Object.fs" />
         <Compile Include="src\typ\LazyCons.fs" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Update="FSharp.Core" Version="6.0.6" />
+        <Compile Include="src\typ\Dual.fs" />
+        <Compile Include="src\typ\Endo.fs" />
+        <Compile Include="src\typ\Pipe\IGenericPipe.fs" />
+        <Compile Include="src\typ\Pipe\MutGenericPipe.fs" />
+        <Compile Include="src\typ\Pipe\MutGenericStatePipe.fs" />
+        <Compile Include="src\typ\Pipe\MutGenericCachePipe.fs" />
+        <Compile Include="src\typ\Pipe\GenericPipe.fs" />
+        <Compile Include="src\typ\Pipe\GenericStatePipe.fs" />
+        <Compile Include="src\typ\Pipe\GenericCachePipe.fs" />
     </ItemGroup>
 
 </Project>
