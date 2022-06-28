@@ -32,4 +32,6 @@ type MutGenericCachePipe<'I, 'O> with
     //Monoid
     static member mempty() = MutGenericPipe<'I, 'O>()
 
+//type MutGenericCachePipe = MutGenericCachePipe<obj, obj>
 type MutCachePipe<'T> = MutGenericCachePipe<'T, 'T>
+type MutCachePipe = MutCachePipe<obj>

@@ -26,4 +26,6 @@ type MutGenericPipe<'I, 'O> with
     //Monoid
     static member mempty() = MutGenericPipe<'I, 'O>()
 
+//type MutGenericPipe = MutGenericPipe<obj, obj>
 type MutPipe<'T> = MutGenericPipe<'T, 'T>
+type MutPipe = MutPipe<obj>

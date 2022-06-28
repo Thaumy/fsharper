@@ -19,8 +19,8 @@ type GenericStatePipe<'I, 'O>(activate, activated) as self =
         member i.fill input = self.fill input
         member i.import igp = self.import igp
         member i.export igp = igp.import self //default impl
-        
-    member self.asMut()=mut
+
+    member self.asMut() = mut
 
 type GenericStatePipe<'I, 'O> with
 
@@ -30,4 +30,6 @@ type GenericStatePipe<'I, 'O> with
     //Monoid
     static member mempty() = GenericStatePipe<'I, 'O>()
 
+//type GenericStatePipe = GenericStatePipe<obj, obj>
 type StatePipe<'T> = GenericStatePipe<'T, 'T>
+type StatePipe = StatePipe<obj>

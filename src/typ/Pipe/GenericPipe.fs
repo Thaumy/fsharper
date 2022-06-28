@@ -17,8 +17,8 @@ type GenericPipe<'I, 'O>(fill: 'I -> 'O) as self =
         member i.fill input = self.fill input
         member i.import igp = self.import igp
         member i.export igp = igp.import self //default impl
-        
-    member self.asMut()=mut
+
+    member self.asMut() = mut
 
 type GenericPipe<'I, 'O> with
 
@@ -28,4 +28,6 @@ type GenericPipe<'I, 'O> with
     //Monoid
     static member mempty() = GenericPipe<'I, 'O>()
 
+//type GenericPipe = GenericPipe<obj, obj>
 type Pipe<'T> = GenericPipe<'T, 'T>
+type Pipe = Pipe<obj>

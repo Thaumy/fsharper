@@ -20,8 +20,8 @@ type GenericCachePipe<'I, 'O>(cache, data) as self =
         member i.fill input = self.fill input
         member i.import igp = self.import igp
         member i.export igp = igp.import self //default impl
-        
-    member self.asMut()=mut
+
+    member self.asMut() = mut
 
 type GenericCachePipe<'I, 'O> with
 
@@ -31,4 +31,6 @@ type GenericCachePipe<'I, 'O> with
     //Monoid
     static member mempty() = GenericPipe<'I, 'O>()
 
+//type GenericCachePipe = GenericCachePipe<obj, obj>
 type CachePipe<'T> = GenericCachePipe<'T, 'T>
+type CachePipe = CachePipe<obj>
