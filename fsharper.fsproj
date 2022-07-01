@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <Compile Include="src\op\Alias.fs" />
+        <Compile Include="src\op\Error.fs" />
         <Compile Include="src\op\Coerce.fs" />
         <Compile Include="src\op\Lazy.fs" />
         <Compile Include="src\op\Boxing.fs" />
@@ -41,12 +42,10 @@
         <Compile Include="src\typ\Dual.fs" />
         <Compile Include="src\typ\Endo.fs" />
         <Compile Include="src\typ\Pipe\IGenericPipe.fs" />
-        <Compile Include="src\typ\Pipe\MutGenericPipe.fs" />
-        <Compile Include="src\typ\Pipe\MutGenericStatePipe.fs" />
-        <Compile Include="src\typ\Pipe\MutGenericCachePipe.fs" />
         <Compile Include="src\typ\Pipe\GenericPipe.fs" />
         <Compile Include="src\typ\Pipe\GenericStatePipe.fs" />
         <Compile Include="src\typ\Pipe\GenericCachePipe.fs" />
+        <Compile Include="src\typ\Pipe\GenericRemotePipe.fs" />
     </ItemGroup>
 
 </Project>

@@ -58,6 +58,7 @@ type List'<'a> with
         self.foldr (f', id) acc
 
     member inline self.foldMap f =
+        //eq to self.foldr ((fun x -> mappend (f x)), mempty)
         self.foldr ((fun x (acc: ^acc) -> mappend (f x) acc), mempty)
 
 type List'<'a> with
