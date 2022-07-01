@@ -1,7 +1,7 @@
 namespace fsharper.typ.Pipe
 
-open fsharper.op
-open fsharper.typ
+open fsharper.op.Coerce
+open fsharper.typ.Procedure
 
 /// 泛用远程管道
 type GenericRemotePipe<'I, 'O>(fill: ('I -> 'O) ref) as self =

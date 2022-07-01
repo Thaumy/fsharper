@@ -55,6 +55,25 @@ type IEnumerable<'T> with
         let f' = fun x -> mappend (f x)
         self.foldr f' mempty
 
+type IEnumerable<'T> with
+
+    member inline self.foldr f acc =
+        let rec loop f acc (en: IEnumerator<'T>) =
+            if en.MoveNext() then
+                f en.Current (loop f acc en)
+            else
+                acc
+
+        loop f acc (self.GetEnumerator())
+
+    member inline self.foldl f acc =
+        let f' = fun x g -> fun acc' -> g (f acc' x)
+        self.foldr f' id acc
+
+    member inline self.foldMap f =
+        let f' = fun x -> mappend (f x)
+        self.foldr f' mempty
+
 //TODO
 
 (*type Foldable<'a> =
