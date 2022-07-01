@@ -3,12 +3,12 @@ namespace fsharper.typ.Pipe
 open fsharper.op.Coerce
 open fsharper.typ.Procedure
 
-/// 泛用管道
-type GenericPipe<'I, 'O>(fill: 'I -> 'O) as self =
+/// 泛用远程管道
+type GenericRemotePipe<'I, 'O>(fill: ('I -> 'O) ref) as self =
 
-    new() = GenericPipe coerce
+    new() = GenericRemotePipe(ref coerce)
 
-    member self.fill = fill
+    member self.fill = fill.Value
 
     member self.import(igp: #IGenericPipe<'t, 'I>) : IGenericPipe<_, _> = GenericPipe(igp.fill .> self.fill)
 
@@ -19,12 +19,12 @@ type GenericPipe<'I, 'O>(fill: 'I -> 'O) as self =
         member i.import igp = self.import igp
         member i.export igp = igp.import self //default impl
 
-type GenericPipe<'I, 'O> with
+type GenericRemotePipe<'I, 'O> with
 
     //Semigroup
-    member ma.mappend(mb: GenericPipe<'O, 't>) = ma.export mb
+    member ma.mappend(mb: GenericRemotePipe<'O, 't>) = ma.export mb
 
     //Monoid
-    static member mempty() = GenericPipe<'I, 'O>()
+    static member mempty() = GenericRemotePipe<'I, 'O>()
 
-type Pipe<'T> = GenericPipe<'T, 'T>
+type RemotePipe<'T> = GenericRemotePipe<'T, 'T>
