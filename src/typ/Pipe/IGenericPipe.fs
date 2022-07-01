@@ -24,9 +24,3 @@ module ext =
 
         //Semigroup
         member ma.mappend(mb: IGenericPipe<'O, 't>) = ma.export mb
-
-(*
-    default i.import igp = igp.export i
-    default i.export igp = igp.import i
-    abstract plugin : IGenericPipe<'I, 'O> -> IGenericPipe<'I, 'O>
-*)
