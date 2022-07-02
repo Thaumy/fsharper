@@ -1,5 +1,7 @@
 namespace fsharper.typ.Pipe
 
+open fsharper.op.Coerce
+
 /// 泛用管道接口
 type IGenericPipe<'I, 'O> =
 
