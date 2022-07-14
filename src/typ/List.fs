@@ -10,6 +10,7 @@ module ext =
 
 [<AutoOpen>]
 module fn =
+    
     open fsharper.op
     open fsharper.op.Boxing
     open fsharper.op.Coerce
@@ -17,7 +18,6 @@ module fn =
     open fsharper.typ.Procedure
     open fsharper.op.Semigroup
     open fsharper.op.Monoid
-
 
     let inline head list =
         match list with
@@ -74,9 +74,9 @@ module fn =
 
         (List' list).foldl (f, [])
 
-    let rec filterOne p list =
+    let rec filterOnce p list =
         match list with
-        | x :: xs -> if p x then Some x else filterOne p xs
+        | x :: xs -> if p x then Some x else filterOnce p xs
         | [] -> None
 
     let inline any p list =
