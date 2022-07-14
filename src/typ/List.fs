@@ -7,13 +7,17 @@ module ext =
     type 'a List with
 
         member self.toArray() = self |> Array.ofList
-        member self.toSeq() = self |> Seq.ofList
 
 [<AutoOpen>]
 module fn =
-
+    
     open fsharper.op
-    open fsharper.typ
+    open fsharper.op.Boxing
+    open fsharper.op.Coerce
+    open fsharper.typ.Ord
+    open fsharper.typ.Procedure
+    open fsharper.op.Semigroup
+    open fsharper.op.Monoid
 
     let inline head list =
         match list with
@@ -65,7 +69,8 @@ module fn =
         | x :: xs -> x :: take (n - 1) xs
 
     let rec filter p list =
-        let f = fun acc x -> if p x then x :: acc else acc
+        let f =
+            fun acc x -> if p x then x :: acc else acc
 
         (List' list).foldl (f, [])
 
@@ -76,13 +81,6 @@ module fn =
 
     let inline any p list =
         foldl (fun acc it -> p it || acc) false list
-
-    let inline none p list = any p list |> not
-
-    let rec find p list =
-        match list with
-        | x :: xs -> if p x then Some x else find p xs
-        | [] -> None
 
     let inline elem x list = any (eq x) list
 
