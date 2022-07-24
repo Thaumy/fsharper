@@ -6,7 +6,6 @@ open fsharper.op.Reflection
 /// 尝试拆箱None错误
 exception TryToUnwrapNone
 
-
 type Option'<'a> =
     | Some of 'a
     | None
@@ -89,3 +88,13 @@ type Option'<'a> with
         | None -> "None"
 
 type Option' = Option'<obj>
+
+open System.Runtime.CompilerServices
+
+[<Extension>]
+type ext =
+    [<Extension>]
+    static member inline intoOption'((ok, v)) = Option'.fromOkComma (ok, v)
+
+    [<Extension>]
+    static member inline intoOption'((v, ok)) = Option'.fromCommaOk (v, ok)
