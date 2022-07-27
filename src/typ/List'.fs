@@ -3,7 +3,7 @@ module fsharper.typ.List'
 
 open System.Collections
 open fsharper.op
-open fsharper.op.Reflection
+open fsharper.op.Reflect
 
 //由于RFC FS-1043尚未完成，为List扩展方法的约束不得不通过包装类完成
 //但貌似可以通过辅助函数补充+静态约束的方式来隐藏这一问题

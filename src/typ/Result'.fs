@@ -2,8 +2,10 @@
 module fsharper.typ.Result'
 
 open System
-open fsharper.op.Reflection
 open fsharper.typ
+open fsharper.op.Reflect
+
+//TODO 此实现受限于RFC FS-1043
 
 type Result'<'a, 'e> =
     | Ok of 'a

@@ -2,14 +2,16 @@ module fsharper.op.Foldable
 
 open System.Collections.Generic
 
+//TODO 此实现受限于RFC FS-1043
+
 let inline foldMap f t =
-    (^t: (member foldMap : (^a -> ^m) -> ^m) t, f)
+    (^t: (member foldMap: (^a -> ^m) -> ^m) t, f)
 
 let inline foldr f acc t =
-    (^t: (member foldr : (^a -> ^acc -> ^acc) * ^acc -> ^acc) t, f, acc)
+    (^t: (member foldr: (^a -> ^acc -> ^acc) * ^acc -> ^acc) t, f, acc)
 
 let inline foldl f acc t =
-    (^t: (member foldl : (^acc -> ^a -> ^acc) * ^acc -> ^acc) t, f, acc)
+    (^t: (member foldl: (^acc -> ^a -> ^acc) * ^acc -> ^acc) t, f, acc)
 
 type IEnumerator<'T> with
     member self.foldr f acc =

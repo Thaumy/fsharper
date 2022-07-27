@@ -1,10 +1,9 @@
 ﻿[<AutoOpen>]
 module fsharper.typ.Option'
 
-open fsharper.op.Reflection
+open fsharper.op.Reflect
 
-/// 尝试拆箱None错误
-exception TryToUnwrapNone
+//TODO 此实现受限于RFC FS-1043
 
 type Option'<'a> =
     | Some of 'a
@@ -31,16 +30,16 @@ type Option'<'a> with
         | None -> None
         | Some x -> f x
 
-    static member inline unit x = Option'<_>.``pure`` x
+    static member inline unit x = Option'<_>.pure x
 
 type Option'<'a> with
     //Boxing
-    static member inline wrap x = Option'<_>.``pure`` x
+    static member inline wrap x = Option'<_>.pure x
 
     member inline self.unwrap() =
         match self with
         | Some x -> x
-        | _ -> raise TryToUnwrapNone
+        | _ -> failwith "Try to unwrap None"
 
     member inline self.unwrapOr f =
         match self with
@@ -98,3 +97,21 @@ type ext =
 
     [<Extension>]
     static member inline intoOption'((v, ok)) = Option'.fromCommaOk (v, ok)
+
+open System.Collections.Generic
+
+type IEnumerator<'T> with
+    member self.find p =
+        let rec loop _ =
+            if self.MoveNext() then
+                if p self.Current then
+                    Some self.Current
+                else
+                    loop ()
+            else
+                None
+
+        loop ()
+
+type IEnumerable<'T> with
+    member inline self.find p = self.GetEnumerator().find p

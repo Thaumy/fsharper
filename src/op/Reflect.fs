@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module fsharper.op.Reflection
+module fsharper.op.Reflect
 
 [<AutoOpen>]
 module ext =

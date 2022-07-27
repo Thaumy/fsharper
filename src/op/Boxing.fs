@@ -1,7 +1,6 @@
 ﻿[<AutoOpen>]
 module fsharper.op.Boxing
 
-
 let inline wrap x = (^m: (static member wrap : ^x -> ^m) x)
 
 let inline unwrap m = (^m: (member unwrap : unit -> ^v) m)

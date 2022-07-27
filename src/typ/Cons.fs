@@ -3,9 +3,7 @@ namespace fsharper.typ
 module Cons =
 
     open System
-    open fsharper.op.Reflection
-
-    exception TryToUnwrapNil
+    open fsharper.op.Reflect
 
     type Cons<'a> =
         | Nil
@@ -67,7 +65,7 @@ module Cons =
 
         member self.unwrap() =
             match self with
-            | Nil -> raise TryToUnwrapNil
+            | Nil -> failwith "Try to unwrap Nil"
             | Cons (x, _) -> x
 
 
@@ -99,17 +97,15 @@ module Cons =
     [<AutoOpen>]
     module fn =
 
-        exception ConsIsNil
-
         let car c =
             match c with
             | Cons (x, _) -> x
-            | Nil -> raise ConsIsNil
+            | Nil -> failwith "Cons is Nil"
 
         let cdr c =
             match c with
             | Cons (_, x) -> x
-            | Nil -> raise ConsIsNil
+            | Nil -> failwith "Cons is Nil"
 
         let cadr x = car <| cdr x
 

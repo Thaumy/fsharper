@@ -4,10 +4,8 @@ namespace fsharper.typ
 module LazyCons =
 
     open System
-    open fsharper.op.Reflection
     open fsharper.op.Lazy
-
-    exception TryToUnwrapLazyNil
+    open fsharper.op.Reflect
 
     type LazyCons<'a> =
         | LazyNil
@@ -68,7 +66,7 @@ module LazyCons =
 
         member self.unwrap() =
             match self with
-            | LazyNil -> raise TryToUnwrapLazyNil
+            | LazyNil -> failwith "Try to unwrap LazyNil"
             | LazyCons (x, _) -> x
 
 
@@ -100,17 +98,15 @@ module LazyCons =
     [<AutoOpen>]
     module fn =
 
-        exception LazyConsIsLazyNil
-
         let car c =
             match c with
             | LazyCons (x, _) -> x
-            | LazyNil -> raise LazyConsIsLazyNil
+            | LazyNil -> failwith "LazyCons is LazyNil"
 
         let cdr c =
             match c with
             | LazyCons (_, x) -> force x
-            | LazyNil -> raise LazyConsIsLazyNil
+            | LazyNil -> failwith "LazyCons is LazyNil"
 
         let cadr x = car <| cdr x
 
