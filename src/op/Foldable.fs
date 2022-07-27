@@ -1,4 +1,3 @@
-[<AutoOpen>]
 module fsharper.op.Foldable
 
 open System.Collections.Generic
@@ -15,7 +14,6 @@ let inline foldl f acc t =
     (^t: (member foldl: (^acc -> ^a -> ^acc) * ^acc -> ^acc) t, f, acc)
 
 type IEnumerator<'T> with
-
     member self.foldr f acc =
         if self.MoveNext() then
             f self.Current (self.foldr f acc)
@@ -56,20 +54,42 @@ type IEnumerable<'T> with
         let f' = fun x -> mappend (f x)
         self.foldr f' mempty
 
-type IEnumerable<'T> with
-
-    member inline self.foldr f acc =
-        let rec loop f acc (en: IEnumerator<'T>) =
-            if en.MoveNext() then
-                f en.Current (loop f acc en)
-            else
-                acc
-
-        loop f acc (self.GetEnumerator())
+type IEnumerator<'T> with
+    member self.foldr f acc =
+        if self.MoveNext() then
+            f self.Current (self.foldr f acc)
+        else
+            acc
 
     member inline self.foldl f acc =
         let f' = fun x g -> fun acc' -> g (f acc' x)
         self.foldr f' id acc
+
+    member inline self.foldl1 f =
+        if self.MoveNext() then
+            self.foldl f self.Current
+        else
+            failwith $"empty IEnumerator<{typeof<'T>}>"
+
+    member inline self.foldr1 f =
+        let rec go prev =
+            if self.MoveNext() then
+                f prev (go self.Current)
+            else
+                prev
+
+        if self.MoveNext() then
+            go self.Current
+        else
+            failwith $"empty IEnumerator<{typeof<'T>}>"
+
+type IEnumerable<'T> with
+
+    member inline self.foldr f acc = self.GetEnumerator().foldr f acc
+    member inline self.foldl f acc = self.GetEnumerator().foldl f acc
+
+    member inline self.foldr1 f = self.GetEnumerator().foldr1 f
+    member inline self.foldl1 f = self.GetEnumerator().foldl1 f
 
     member inline self.foldMap f =
         let f' = fun x -> mappend (f x)
