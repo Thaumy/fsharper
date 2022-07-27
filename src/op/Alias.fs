@@ -1,6 +1,13 @@
 namespace fsharper.op.Alias
 
 open System
+open System.Collections.Concurrent
+open System.Collections.Generic
+
+[<AutoOpen>]
+module Dictionary =
+    type Dict<'k, 'v> = Dictionary<'k, 'v>
+    type ConcurrentDict<'k, 'v> = ConcurrentDictionary<'k, 'v>
 
 [<AutoOpen>]
 module uint =
