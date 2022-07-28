@@ -19,6 +19,7 @@
         <Compile Include="src\op\Monad.fs" />
         <Compile Include="src\op\Coerce.fs" />
         <Compile Include="src\op\Reflect.fs" />
+        <Compile Include="src\op\Pattern.fs" />
         <Compile Include="src\op\Monoid.fs" />
         <Compile Include="src\op\Iterable.fs" />
         <Compile Include="src\op\Functor.fs" />
