@@ -1,7 +1,7 @@
 namespace fsharper.typ.Pipe
 
-open fsharper.op.Coerce
-open fsharper.typ.Procedure
+open fsharper.op
+open fsharper.typ
 
 /// 泛用管道
 type GenericPipe<'I, 'O>(fill: 'I -> 'O) as self =

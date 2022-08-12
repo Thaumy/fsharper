@@ -1,7 +1,7 @@
 namespace fsharper.typ.Pipe
 
-open fsharper.op.Coerce
-open fsharper.typ.Procedure
+open fsharper.op
+open fsharper.typ
 
 /// 泛用状态管道
 type GenericStatePipe<'I, 'O>(activate: 'I -> 'O, activated: 'I -> 'O) as self =
