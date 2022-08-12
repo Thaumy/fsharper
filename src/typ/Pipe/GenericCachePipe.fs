@@ -1,8 +1,7 @@
 namespace fsharper.typ.Pipe
 
+open fsharper.op
 open fsharper.typ
-open fsharper.op.Coerce
-open fsharper.typ.Pipe
 
 /// 泛用缓存管道
 type GenericCachePipe<'I, 'O>(cache, data) as self =

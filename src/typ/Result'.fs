@@ -32,11 +32,11 @@ type Result'<'a, 'e> with
         | Err e -> Err e
         | Ok x -> f x
 
-    static member inline unit x = Result'<_, _>.``pure`` x
+    static member inline unit x = Result'<_, _>.pure x
 
 type Result'<'a, 'e> with
     //Boxing
-    static member inline wrap x = Result'<_, _>.``pure`` x
+    static member inline wrap x = Result'<_, _>.pure x
 
     member inline self.unwrap() =
         match self with
@@ -49,6 +49,16 @@ type Result'<'a, 'e> with
         | _ -> f ()
 
     member inline self.unwrapOrPanic e = self.unwrapOr (fun () -> raise e)
+
+    member inline self.orPure f =
+        match self with
+        | Err e -> Ok(f e)
+        | _ -> self
+
+    member inline self.orBind f =
+        match self with
+        | Err e -> f e
+        | _ -> self
 
     member inline self.ifCanUnwrap f =
         match self with

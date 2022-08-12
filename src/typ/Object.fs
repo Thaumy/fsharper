@@ -8,3 +8,5 @@ module ext =
 
     type Object with
         member self.whenNull f = if self = null then f else self
+
+    let inline obj x = x :> obj

@@ -47,6 +47,16 @@ type Option'<'a> with
         | _ -> f ()
 
     member inline self.unwrapOrPanic e = self.unwrapOr (fun () -> raise e)
+    
+    member inline self.orPure f =
+        match self with
+        | None -> Some(f ())
+        | _ -> self
+
+    member inline self.orBind f =
+        match self with
+        | None -> f ()
+        | _ -> self
 
     member inline self.ifCanUnwrap f =
         match self with

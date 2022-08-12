@@ -8,10 +8,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="src\alias\int.fs" />
+        <Compile Include="src\alias\uint.fs" />
+        <Compile Include="src\alias\float.fs" />
+        <Compile Include="src\alias\Dictionary.fs" />
         <Compile Include="src\op\Eq.fs" />
         <Compile Include="src\op\Fmt.fs" />
         <Compile Include="src\op\Lazy.fs" />
-        <Compile Include="src\op\Alias.fs" />
         <Compile Include="src\op\Async.fs" />
         <Compile Include="src\op\Debug.fs" />
         <Compile Include="src\op\Assert.fs" />
@@ -29,8 +32,9 @@
         <Compile Include="src\op\Applicative.fs" />
         <Compile Include="src\typ\Option'.fs" />
         <Compile Include="src\typ\Result'.fs" />
+        <Compile Include="src\typ\Seq.fs" />
         <Compile Include="src\typ\Ord.fs" />
-        <Compile Include="src\typ\Procedure.fs" />
+        <Compile Include="src\typ\Proc.fs" />
         <Compile Include="src\typ\List'.fs" />
         <Compile Include="src\typ\List.fs" />
         <Compile Include="src\typ\Task.fs" />
@@ -47,6 +51,10 @@
         <Compile Include="src\typ\Pipe\GenericStatePipe.fs" />
         <Compile Include="src\typ\Pipe\GenericCachePipe.fs" />
         <Compile Include="src\typ\Pipe\GenericRemotePipe.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="FSharp.Core" Version="6.0.5" />
     </ItemGroup>
 
 </Project>

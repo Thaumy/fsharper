@@ -1,7 +1,7 @@
-﻿module fsharper.typ.Ord
+﻿[<AutoOpen>]
+module fsharper.typ.Ord
 
 open System
-
 
 type Ordering =
     | GT
