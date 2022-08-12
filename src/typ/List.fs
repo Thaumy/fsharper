@@ -7,13 +7,13 @@ module ext =
     type 'a List with
 
         member self.toArray() = self |> Array.ofList
+        member self.toSeq() = self |> Seq.ofList
 
 [<AutoOpen>]
 module fn =
 
     open fsharper.op
-    open fsharper.typ.Ord
-    open fsharper.typ.Procedure
+    open fsharper.typ
 
     let inline head list =
         match list with
