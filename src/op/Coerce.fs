@@ -6,9 +6,11 @@ open System
 let is<'b> a = typeof<'b>.IsInstanceOfType a
 
 //when 'a = 'b, coerce is eq to id
+//用于强制转换
 let inline coerce (a: 'a) : 'b =
     downcast Convert.ChangeType(a, typeof<'b>)
 
+//用于上下转型
 let inline cast (a: 'a) : 'b = downcast (a :> obj)
 
 type Object with

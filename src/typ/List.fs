@@ -65,8 +65,7 @@ module fn =
         | x :: xs -> x :: take (n - 1) xs
 
     let rec filter p list =
-        let f =
-            fun acc x -> if p x then x :: acc else acc
+        let f = fun acc x -> if p x then x :: acc else acc
 
         (List' list).foldl (f, [])
 
