@@ -47,7 +47,7 @@ type Option'<'a> with
         | _ -> f ()
 
     member inline self.unwrapOrPanic e = self.unwrapOr (fun () -> raise e)
-    
+
     member inline self.orPure f =
         match self with
         | None -> Some(f ())
@@ -81,6 +81,12 @@ type Option'<'a> with
     static member inline fromOkComma x =
         match x with
         | true, v -> Some v
+        | _ -> None
+
+    static member inline fromThrowable f =
+        try
+            f () |> Some
+        with
         | _ -> None
 
     member inline self.debug() =

@@ -70,6 +70,12 @@ type Result'<'a, 'e> with
         | Ok x -> trueDo x
         | Err e -> falseDo e
 
+    static member inline fromThrowable f =
+        try
+            f () |> Ok
+        with
+        | e -> Err e
+
     member inline self.debug() =
         match self with
         | Ok x ->
