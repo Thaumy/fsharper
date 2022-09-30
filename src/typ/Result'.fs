@@ -70,9 +70,15 @@ type Result'<'a, 'e> with
         | Ok x -> trueDo x
         | Err e -> falseDo e
 
+    static member inline fromNullable x =
+        if (x :> obj = null) then
+            NullReferenceException() :> exn |> Err
+        else
+            Ok x
+
     static member inline fromThrowable f =
         try
-            f () |> Ok
+            f () |> Result'<_, _>.fromNullable
         with
         | e -> Err e
 

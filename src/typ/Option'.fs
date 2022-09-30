@@ -1,6 +1,7 @@
 ﻿[<AutoOpen>]
 module fsharper.typ.Option'
 
+open System
 open fsharper.op.Reflect
 
 //TODO 此实现受限于RFC FS-1043
@@ -69,9 +70,10 @@ type Option'<'a> with
         | _ -> falseDo ()
 
     static member inline fromNullable x =
-        match x with
-        | null -> None
-        | _ -> Some x
+        if (x :> obj = null) then
+            None
+        else
+            Some x
 
     static member inline fromCommaOk x =
         match x with
@@ -85,7 +87,7 @@ type Option'<'a> with
 
     static member inline fromThrowable f =
         try
-            f () |> Some
+            f () |> Option'<_>.fromNullable
         with
         | _ -> None
 
