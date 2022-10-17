@@ -1,6 +1,7 @@
 [<AutoOpen>]
 module fsharper.op.Iterable
 
+open System.Collections
 open System.Collections.Generic
 
 type IEnumerator<'T> with
@@ -13,6 +14,9 @@ type IEnumerator<'T> with
             member i.MoveNext() = self.MoveNext() }
 
 type IEnumerable<'T> with
-    member inline self.map f = self.GetEnumerator().map f
+    member inline self.map f =
+        { new IEnumerable<'a> with
+            override i.GetEnumerator() : IEnumerator = self.GetEnumerator().map f
+            override i.GetEnumerator() : IEnumerator<'a> = self.GetEnumerator().map f }
 
 let inline map (t: IEnumerable<'a>) f = t.map f

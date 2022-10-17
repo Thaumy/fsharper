@@ -1,6 +1,7 @@
 ﻿[<AutoOpen>]
 module fsharper.typ.Option'
 
+open System
 open fsharper.op.Reflect
 
 //TODO 此实现受限于RFC FS-1043
@@ -47,7 +48,7 @@ type Option'<'a> with
         | _ -> f ()
 
     member inline self.unwrapOrPanic e = self.unwrapOr (fun () -> raise e)
-    
+
     member inline self.orPure f =
         match self with
         | None -> Some(f ())
@@ -69,9 +70,10 @@ type Option'<'a> with
         | _ -> falseDo ()
 
     static member inline fromNullable x =
-        match x with
-        | null -> None
-        | _ -> Some x
+        if (x :> obj = null) then
+            None
+        else
+            Some x
 
     static member inline fromCommaOk x =
         match x with
@@ -81,6 +83,12 @@ type Option'<'a> with
     static member inline fromOkComma x =
         match x with
         | true, v -> Some v
+        | _ -> None
+
+    static member inline fromThrowable f =
+        try
+            f () |> Option'<_>.fromNullable
+        with
         | _ -> None
 
     member inline self.debug() =
