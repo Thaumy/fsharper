@@ -1,23 +1,8 @@
 ﻿[<AutoOpen>]
 module fsharper.typ.Proc
 
-[<AutoOpen>]
-module ext =
-    open System
-
-    (*
-    type Object with
-
-        member self.``let`` f = f self
-
-        member self.also f =
-            self.``let`` f
-            self
-
-        member self.effect f : ^t =
-            f self |> ignore
-            self :> ^t
-    *)
+open System
+open System.Runtime.CompilerServices
 
 [<AutoOpen>]
 module fn =
@@ -47,3 +32,11 @@ module fn =
     let inline (<.) a b = b .> a
 
     let inline (<..) a b = b ..> a
+
+    [<Extension>]
+    type ext() =
+        [<Extension>]
+        static member inline effect(x, f) = x |> effect f
+
+        [<Extension>]
+        static member inline apply(x, f) = f x
