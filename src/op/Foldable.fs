@@ -1,3 +1,4 @@
+[<AutoOpen>]
 module fsharper.op.Foldable
 
 open System.Collections.Generic
@@ -14,6 +15,7 @@ let inline foldl f acc t =
     (^t: (member foldl: (^acc -> ^a -> ^acc) * ^acc -> ^acc) t, f, acc)
 
 type IEnumerator<'T> with
+
     member self.foldr f acc =
         if self.MoveNext() then
             f self.Current (self.foldr f acc)

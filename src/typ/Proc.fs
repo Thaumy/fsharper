@@ -40,6 +40,3 @@ module fn =
 
         [<Extension>]
         static member inline apply(x, f) = f x
-
-        [<Extension>]
-        static member inline always(_, x) = x
