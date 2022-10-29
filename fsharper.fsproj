@@ -46,15 +46,10 @@
         <Compile Include="src\typ\String.fs" />
         <Compile Include="src\typ\Object.fs" />
         <Compile Include="src\typ\LazyCons.fs" />
-        <Compile Include="src\typ\Pipe\IGenericPipe.fs" />
-        <Compile Include="src\typ\Pipe\GenericPipe.fs" />
-        <Compile Include="src\typ\Pipe\GenericStatePipe.fs" />
-        <Compile Include="src\typ\Pipe\GenericCachePipe.fs" />
-        <Compile Include="src\typ\Pipe\GenericRemotePipe.fs" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Update="FSharp.Core" Version="6.0.5" />
+      <PackageReference Update="FSharp.Core" Version="6.0.6" />
     </ItemGroup>
 
 </Project>
