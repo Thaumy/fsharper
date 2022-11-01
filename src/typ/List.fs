@@ -69,11 +69,6 @@ module fn =
 
         (List' list).foldl (f, [])
 
-    let rec filterOnce p list =
-        match list with
-        | x :: xs -> if p x then Some x else filterOnce p xs
-        | [] -> None
-
     let inline any p list =
         foldl (fun acc it -> p it || acc) false list
 
