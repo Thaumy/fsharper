@@ -15,9 +15,6 @@ let inline unwrapOr m f =
 let inline unwrapOrPanic m e =
     (^m: (member unwrapOrPanic: Exception -> ^v) m, e)
 
-let inline ifCanUnwrap m f =
-    (^m: (member ifCanUnwrap: 'v -> unit) m, f)
-
 let inline ifCanUnwrapOr m trueDo falseDo =
     (^m: (member ifCanUnwrapOr: ('v -> 'r) * (unit -> 'r) -> 'r) m, trueDo, falseDo)
 

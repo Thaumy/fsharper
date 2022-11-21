@@ -60,11 +60,6 @@ type Result'<'a, 'e> with
         | Err e -> f e
         | _ -> self
 
-    member inline self.ifCanUnwrap f =
-        match self with
-        | Ok x -> f x
-        | _ -> ()
-
     member inline self.ifCanUnwrapOr(trueDo, falseDo) =
         match self with
         | Ok x -> trueDo x
