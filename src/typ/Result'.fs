@@ -46,9 +46,9 @@ type Result'<'a, 'e> with
     member inline self.unwrapOr f =
         match self with
         | Ok x -> x
-        | _ -> f ()
+        | Err e -> f e
 
-    member inline self.unwrapOrPanic e = self.unwrapOr (fun () -> raise e)
+    member inline self.unwrapOrPanic e = self.unwrapOr (fun _ -> raise e)
 
     member inline self.orPure f =
         match self with

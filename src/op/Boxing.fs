@@ -10,7 +10,7 @@ let inline unwrap m = (^m: (member unwrap: unit -> ^v) m)
 let inline unwrap2 m = m |> unwrap |> unwrap
 
 let inline unwrapOr m f =
-    (^m: (member unwrapOr: (unit -> ^v) -> ^v) m, f)
+    (^m: (member unwrapOr: (^e -> ^v) -> ^v) m, f)
 
 let inline unwrapOrPanic m e =
     (^m: (member unwrapOrPanic: Exception -> ^v) m, e)
