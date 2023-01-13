@@ -42,12 +42,17 @@ type Option'<'a> with
         | Some x -> x
         | _ -> failwith "Try to unwrap None"
 
-    member inline self.unwrapOr f =
+    member inline self.unwrapOr v =
+        match self with
+        | Some x -> x
+        | _ -> v
+
+    member inline self.unwrapOrEval f =
         match self with
         | Some x -> x
         | _ -> f ()
 
-    member inline self.unwrapOrPanic e = self.unwrapOr (fun () -> raise e)
+    member inline self.unwrapOrPanic e = self.unwrapOrEval (fun () -> raise e)
 
     member inline self.orPure f =
         match self with

@@ -43,12 +43,17 @@ type Result'<'a, 'e> with
         | Ok x -> x
         | Err e -> e.ToString() |> Exception |> raise
 
-    member inline self.unwrapOr f =
+    member inline self.unwrapOr v =
+        match self with
+        | Ok x -> x
+        | _ -> v
+
+    member inline self.unwrapOrEval f =
         match self with
         | Ok x -> x
         | Err e -> f e
 
-    member inline self.unwrapOrPanic e = self.unwrapOr (fun _ -> raise e)
+    member inline self.unwrapOrPanic e = self.unwrapOrEval (fun _ -> raise e)
 
     member inline self.orPure f =
         match self with
