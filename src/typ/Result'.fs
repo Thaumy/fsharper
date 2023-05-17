@@ -10,6 +10,8 @@ open fsharper.op.Reflect
 type Result'<'a, 'e> =
     | Ok of 'a
     | Err of 'e
+    
+type Result'<'t> = Result'<'t, exn>
 
 type Result'<'a, 'e> with
     //Functor

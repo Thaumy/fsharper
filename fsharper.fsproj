@@ -12,6 +12,7 @@
         <Compile Include="src\alias\uint.fs" />
         <Compile Include="src\alias\float.fs" />
         <Compile Include="src\alias\Dictionary.fs" />
+        <Compile Include="src\alias\Result.fs" />
         <Compile Include="src\op\Eq.fs" />
         <Compile Include="src\op\Fmt.fs" />
         <Compile Include="src\op\Lazy.fs" />
